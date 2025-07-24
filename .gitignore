@@ -10,3 +10,10 @@ runs/
 
 # macos
 *.DS_Store
+
+# Other stuffs
+~$*
+*.md
+!README.md
+TODO
+*.jar
