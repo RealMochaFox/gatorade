@@ -19,6 +19,17 @@ import com.mochafox.gatorade.item.ModCreativeModeTabs;
 import com.mochafox.gatorade.item.ModDataComponents;
 import com.mochafox.gatorade.item.ModItems;
 
+/**
+ * Gatorade Mod - Parody Disclaimer
+ * 
+ * DISCLAIMER: This mod is an unofficial parody project for educational 
+ * and entertainment purposes only. It is not affiliated with, endorsed by, or sponsored 
+ * by PepsiCo, Inc. or the Gatorade brand. "Gatorade" is a registered trademark of 
+ * PepsiCo, Inc. This mod is protected under fair use and parody provisions.
+ * 
+ * This transformative work reimagines the popular sports drink concept within the 
+ * context of Minecraft gameplay for humorous and educational purposes.
+ */
 @Mod(Gatorade.MODID)
 public class Gatorade {
     public static final String MODID = "gatorade";
