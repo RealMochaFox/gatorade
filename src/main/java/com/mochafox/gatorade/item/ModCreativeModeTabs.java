@@ -48,8 +48,8 @@ public class ModCreativeModeTabs {
                 // Infinite electrolyte drink (creative only)
                 output.accept(ModItems.INFINITE_ELECTROLYTE_DRINK.get());
 
-                // Gatorade bucket block
-                output.accept(ModBlocks.GATORADE_BUCKET_BLOCK.get());
+                // Gatorade cooler block
+                output.accept(ModBlocks.GATORADE_COOLER_BLOCK.get());
 
                 // Pre-filled squeeze bottle
                 ItemStack filledBottle = new ItemStack(ModItems.SQUEEZE_BOTTLE.get());

@@ -1,6 +1,6 @@
 package com.mochafox.gatorade.block.custom;
 
-import com.mochafox.gatorade.block.entity.GatoradeBucketBlockEntity;
+import com.mochafox.gatorade.block.entity.GatoradeCoolerBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
@@ -19,12 +19,12 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 /**
- * Block representing a placed Gatorade bucket with fluid storage capability.
+ * Block representing a placed Gatorade cooler with fluid storage capability.
  */
-public class GatoradeBucketBlock extends BaseEntityBlock {
-    public static final MapCodec<GatoradeBucketBlock> CODEC = simpleCodec(GatoradeBucketBlock::new);
+public class GatoradeCoolerBlock extends BaseEntityBlock {
+    public static final MapCodec<GatoradeCoolerBlock> CODEC = simpleCodec(GatoradeCoolerBlock::new);
 
-    public GatoradeBucketBlock(Properties properties) {
+    public GatoradeCoolerBlock(Properties properties) {
         super(properties);
     }
 
@@ -35,7 +35,7 @@ public class GatoradeBucketBlock extends BaseEntityBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return new GatoradeBucketBlockEntity(pos, state);
+        return new GatoradeCoolerBlockEntity(pos, state);
     }
 
     @Override
@@ -58,8 +58,8 @@ public class GatoradeBucketBlock extends BaseEntityBlock {
             if (itemFluidHandler != null && !itemFluidHandler.getFluidInTank(0).isEmpty()) {
                 // Get the block entity and its fluid handler
                 BlockEntity blockEntity = level.getBlockEntity(pos);
-                if (blockEntity instanceof GatoradeBucketBlockEntity gatoradeBucket) {
-                    IFluidHandler blockFluidHandler = gatoradeBucket.getFluidHandler();
+                if (blockEntity instanceof GatoradeCoolerBlockEntity gatoradeCooler) {
+                    IFluidHandler blockFluidHandler = gatoradeCooler.getFluidHandler();
                     FluidStack fluidInBucket = itemFluidHandler.getFluidInTank(0);
                     
                     // Try to fill the block with the fluid from the bucket

@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "gatorade:item/gatorade_bucket_block"
+    "model": "gatorade:item/gatorade_cooler_block"
   }
 }

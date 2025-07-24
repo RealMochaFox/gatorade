@@ -1,7 +1,7 @@
 {
   "display": {
     "icon": {
-      "id": "gatorade:gatorade_bucket_block"
+      "id": "gatorade:gatorade_cooler_block"
     },
     "title": {
       "translate": "advancement.gatorade.obtain_cooler.title"

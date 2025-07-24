@@ -12,7 +12,7 @@
   "advancement.gatorade.obtain_cooler.title": "Big Shot",
   "advancement.gatorade.obtain_cooler.desc": "Obtained a Gatorade Cooler. Now you're a real team player!",
 
-  "block.gatorade.gatorade_bucket_block": "Gatorade Bucket",
+  "block.gatorade.gatorade_cooler_block": "Gatorade Cooler",
 
   "item.gatorade.squeeze_bottle": "Squeeze Bottle",
   "item.gatorade.infinite_electrolyte_drink": "Infinite Electrolyte Drink",
@@ -32,9 +32,9 @@
   "item.gatorade.green_apple_gatorade_bucket": "Green Apple Bucket",
   "item.gatorade.squeeze_bottle.empty": "The squeeze bottle is empty!",
   "item.gatorade.squeeze_bottle.filled": "Filled squeeze bottle with %d mB of %s!",
-  "item.gatorade.squeeze_bottle.emptied": "Emptied %d mB of %s into the bucket!",
-  "item.gatorade.squeeze_bottle.bucket_empty": "The Gatorade bucket is empty!",
-  "item.gatorade.squeeze_bottle.bucket_full": "The Gatorade bucket is full!",
+  "item.gatorade.squeeze_bottle.emptied": "Emptied %d mB of %s into the cooler!",
+  "item.gatorade.squeeze_bottle.bucket_empty": "The Gatorade cooler is empty!",
+  "item.gatorade.squeeze_bottle.bucket_full": "The Gatorade cooler is full!",
   "item.gatorade.squeeze_bottle.full": "The squeeze bottle is already full!",
   "item.gatorade.squeeze_bottle.different_fluid": "The squeeze bottle contains a different fluid!",
   "item.gatorade.squeeze_bottle.cannot_fill": "Cannot fill the squeeze bottle!",

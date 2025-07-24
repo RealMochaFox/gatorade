@@ -35,7 +35,7 @@ A NeoForge mod for Minecraft that adds Gatorade as a naturally occurring resourc
 - **Electrolyte Restoration**: Drinking Gatorade fluids restores electrolytes
 
 ### Blocks & Storage
-- **Gatorade Bucket Block**: Large fluid storage container (16,000mB capacity)
+- **Gatorade Cooler Block**: Large fluid storage container (16,000mB capacity)
   - Accepts any Gatorade fluid type
   - Compatible with fluid pipes and standard containers
   - Can be filled/emptied with buckets and squeeze bottles

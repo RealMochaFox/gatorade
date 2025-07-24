@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import com.mochafox.gatorade.Gatorade;
-import com.mochafox.gatorade.block.custom.GatoradeBucketBlock;
+import com.mochafox.gatorade.block.custom.GatoradeCoolerBlock;
 import com.mochafox.gatorade.item.ModItems;
 
 import java.util.function.Function;
@@ -20,8 +20,8 @@ import java.util.function.Function;
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Gatorade.MODID);
 
-    public static final DeferredBlock<Block> GATORADE_BUCKET_BLOCK = registerBlock("gatorade_bucket_block",
-            properties -> new GatoradeBucketBlock(properties.strength(2f).noLootTable().sound(SoundType.STONE)));
+    public static final DeferredBlock<Block> GATORADE_COOLER_BLOCK = registerBlock("gatorade_cooler_block",
+            properties -> new GatoradeCoolerBlock(properties.strength(2f).noLootTable().sound(SoundType.STONE)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> function) {
         DeferredBlock<T> toReturn = BLOCKS.registerBlock(name, function);

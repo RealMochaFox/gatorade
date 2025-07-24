@@ -11,27 +11,27 @@ import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 import com.mochafox.gatorade.Config;
 
 /**
- * BlockEntity for the Gatorade Bucket Block that handles fluid storage.
+ * BlockEntity for the Gatorade Cooler Block that handles fluid storage.
  * Uses Capabilities.FluidHandler.BLOCK for fluid management.
  * Data persistence is handled through data components on the block item.
  */
-public class GatoradeBucketBlockEntity extends BlockEntity {
+public class GatoradeCoolerBlockEntity extends BlockEntity {
     private static final int CAPACITY = 16000; // 16 buckets (16,000 mB) capacity
     private FluidStack storedFluid = FluidStack.EMPTY;
 
-    public GatoradeBucketBlockEntity(BlockPos pos, BlockState blockState) {
-        super(ModBlockEntities.GATORADE_BUCKET_BLOCK_ENTITY.get(), pos, blockState);
+    public GatoradeCoolerBlockEntity(BlockPos pos, BlockState blockState) {
+        super(ModBlockEntities.GATORADE_COOLER_BLOCK_ENTITY.get(), pos, blockState);
     }
 
     /**
      * Gets the fluid handler capability for this block entity.
      */
     public IFluidHandler getFluidHandler() {
-        return new GatoradeBucketFluidHandler();
+        return new GatoradeCoolerFluidHandler();
     }
 
     /**
-     * Checks if a fluid is a Gatorade fluid that this bucket can accept
+     * Checks if a fluid is a Gatorade fluid that this cooler can accept
      */
     private boolean isGatoradeFluid(net.minecraft.world.level.material.Fluid fluid) {
         // If chaos mode is enabled, accept any fluid
@@ -44,9 +44,9 @@ public class GatoradeBucketBlockEntity extends BlockEntity {
     }
 
     /**
-     * Internal fluid handler implementation for the Gatorade Bucket Block Entity.
+     * Internal fluid handler implementation for the Gatorade Cooler Block Entity.
      */
-    private class GatoradeBucketFluidHandler implements IFluidHandler {
+    private class GatoradeCoolerFluidHandler implements IFluidHandler {
 
         @Override
         public int getTanks() {

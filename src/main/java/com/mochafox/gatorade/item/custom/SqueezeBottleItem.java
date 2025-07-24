@@ -27,7 +27,7 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 
 import com.mochafox.gatorade.Config;
 import com.mochafox.gatorade.Gatorade;
-import com.mochafox.gatorade.block.entity.GatoradeBucketBlockEntity;
+import com.mochafox.gatorade.block.entity.GatoradeCoolerBlockEntity;
 import com.mochafox.gatorade.electrolytes.ElectrolytesUtil;
 import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 
@@ -93,14 +93,14 @@ public class SqueezeBottleItem extends Item {
             return InteractionResult.PASS;
         }
         
-        // Check if we're clicking on a Gatorade Bucket Block
+        // Check if we're clicking on a Gatorade Cooler Block
         BlockEntity blockEntity = level.getBlockEntity(pos);
         // Check if block is a fluid source
         BlockState clickedState = level.getBlockState(pos);
         FluidState fluidState = clickedState.getFluidState();
         Gatorade.LOGGER.info(descriptionId + " clicked at " + pos + " with fluid: " + fluidState);
-        if (blockEntity instanceof GatoradeBucketBlockEntity gatoradeBucket) {
-            IFluidHandler blockFluidHandler = gatoradeBucket.getFluidHandler();
+        if (blockEntity instanceof GatoradeCoolerBlockEntity gatoradeCooler) {
+            IFluidHandler blockFluidHandler = gatoradeCooler.getFluidHandler();
             IFluidHandlerItem itemFluidHandler = itemStack.getCapability(Capabilities.FluidHandler.ITEM);
             
             if (itemFluidHandler != null) {
