@@ -1,0 +1,12 @@
+# gradle
+.gradle/
+build/
+out/
+classes/
+logs/
+
+# NeoForge
+runs/
+
+# macos
+*.DS_Store
