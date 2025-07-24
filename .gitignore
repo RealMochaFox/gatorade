@@ -15,5 +15,4 @@ runs/
 ~$*
 *.md
 !README.md
-TODO
 *.jar
