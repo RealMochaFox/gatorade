@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:model",
+    "model": "gatorade:item/squeeze_bottle",
+    "tints": [
+      {
+        "type": "minecraft:constant",
+        "value": 16777215
+      },
+      {
+        "type": "gatorade:gatorade_fluid_item_tint_source",
+        "default": 16777215
+      }
+    ]
+  }
+}

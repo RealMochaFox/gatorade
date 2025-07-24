@@ -1,0 +1,31 @@
+{
+  "display": {
+    "icon": {
+      "id": "gatorade:squeeze_bottle"
+    },
+    "title": {
+      "translate": "advancement.gatorade.drink_100_gatorade_bottles.title"
+    },
+    "description": {
+      "translate": "advancement.gatorade.drink_100_gatorade_bottles.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "parent": "gatorade:gatorade/drink_first_gatorade",
+  "criteria": {
+    "drink_100_gatorade": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "items": [
+            "gatorade:squeeze_bottle"
+          ],
+          "count": 100
+        }
+      }
+    }
+  }
+}

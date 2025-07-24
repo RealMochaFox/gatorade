@@ -1,0 +1,19 @@
+license="${mod_license}"
+
+# A list of mods - how many allowed here is determined by the individual mod loader
+[[mods]]
+modId="${mod_id}" #mandatory
+version="${mod_version}"
+displayName="${mod_name}"
+
+# A URL to query for updates for this mod. See the JSON update specification https://docs.neoforged.net/docs/misc/updatechecker/
+#updateJSONURL="https://change.me.example.invalid/updates.json" #optional
+
+# A URL to refer people to when problems occur with this mod
+#issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
+
+displayURL="https://mochafox.com/projects/gatorade"
+logoFile="icon.png"
+authors="${mod_authors}"
+description='''${mod_description}\n\n§lThis mod is unofficial and is not affiliated with Gatorade or PepsiCo in any way. This mod is a parody of sports drinks and their marketing around electrolytes.§r'''
+credits='''\n\n- Spritework by hecklechet\n- https://docs.neoforged.net\n- https://github.com/Tutorials-By-Kaupenjoe\n- https://docs.blamejared.com/1.21.1'''

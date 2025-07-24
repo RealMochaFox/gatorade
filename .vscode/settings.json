@@ -1,0 +1,16 @@
+{
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.env.osx": {
+    "DIRENV_LOG_FORMAT": "",
+    "DIRENV_WARN_TIMEOUT": "0"
+  },
+  "terminal.integrated.profiles.osx": {
+    "zsh": {
+      "path": "/bin/zsh",
+      "args": ["--login"]
+    }
+  },
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "java.debug.settings.onBuildFailureProceed": true,
+  "java.compile.nullAnalysis.mode": "automatic"
+}

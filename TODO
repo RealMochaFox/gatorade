@@ -1,0 +1,134 @@
+# Gatorade Mod :: TODO
+
+## :: V2.0.0 :: TODO ::
+### Biome / World Gen
+#### Gatorade Dimension
+- Draft some ideas for this
+
+### Fluids
+#### Gatorade Fluids
+- Add Gatorade Frost bottle
+- Add Gatorade Frost Lineup
+  - Cascade Crash
+  - Alpine Snow
+  - Whitewater Splash
+  - High Tide
+  - Rain Berry
+  - Rain Lime
+  - Rain Strawberry Kiwi
+  - Tropical Mango
+  - Orange-Strawberry
+  - Summit Storm
+  - Glacier Freeze
+  - Glacier Cherry
+  - Arctic Blitz
+  - Riptide Rush
+  - Icy Charge
+
+## :: V1.1.0 :: TODO ::
+### Behavior
+- Electrolytes should deplete with tool use
+- Electrolytes should deplete when jumping and swimming
+
+### Config Options
+- Config option to disable each gatorade type. Config name: Disabled gatorade types; Type: String array of fluid names/ids?
+
+### Fluids
+#### Gatorade Fluids
+- Add Gatorade Fierce bottle
+- Add Gatorade Fierce Lineup
+  - Melon
+  - Fruit Punch + Berry
+  - Fierce Lime
+  - Fierce Berry
+  - Orange + Tropical Fruit
+  - Lemon-Lime + Strawberry
+  - Fierce Wild Berry
+  - Grape
+  - Strawberry
+  - Blue Cherry
+  - Green Apple
+
+## :: V1.0.0 :: TODO ::
+
+### Biome / World Gen
+#### Gatorade Springs
+- Implement naturally occuring gatorade [springs](https://docs.neoforged.net/docs/worldgen/biomemodifier/#available-values-for-decoration-steps) that spawn
+- Gatorade springs should support spawning all kinds of gatorade fluids
+
+### Blocks & Items
+#### Plastic Gatorade Bottle
+- Single use item that is pre-filled with a gatorade fluid
+- Right clicking with a filled Plastic Gatorade Bottle should consume the item and fill the players electrolytes bar
+- Drink at the same rate as a Squeeze Bottle
+- Contain the same amount of fluid as a Squeeze Bottle
+- Should have a different texture than the Squeeze Bottle
+
+#### Squeeze Bottle
+- Right clicking Squeeze Bottle aimed at Gatorade Fluid should fill the Squeeze Bottle with that fluid [?]
+- Empty Squeeze Bottle should have a different texture than the filled Squeeze Bottle
+
+#### Gatorade Bucket Block
+- Right clicking Gatorade Bucket Block with an empty gatorade fluid bucket will fill the bucket from the Gatorade Bucket Block
+- need particle effects for buket
+
+#### Gatorade Bucket Item
+- When emptied of fluid, it should take the texture of the empty gatorade bucket, not the minecraft bucket
+- Should fully do nothing in creative mode
+
+### Advancements
+- Add an advancement for drinking a new type of gatorade fluid
+- For drinking first gatorade fluid [%]
+- Add an advancement for drinking 100 bottles of gatorade [%]
+- For making the cooler [%]
+- For drinking every type of gatorade fluid [%]
+
+```java
+if (livingEntity instanceof ServerPlayer serverPlayer) {
+    CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
+    serverPlayer.awardStat(Stats.ITEM_USED.get(this));
+}
+```
+
+### Misc
+- Add a couple florbalistican songs to the mod
+- Establish crafting recipes
+- Fix issue where messages are displayed weirdly when bottle interacts with a bucket
+
+## :: V1.0.0 :: Completed Tasks ::
+### Blocks & Items
+#### Squeeze Bottle
+- Right clicking Squeeze Bottle aimed at a filled Gatorade Bucket Block should try to fill the Squeeze Bottle with that fluid
+- Right clicking Squeeze Bottle aimed at empty Gatorade Bucket Block should empty the Squeeze Bottle
+
+#### Gatorade Bucket Block
+- shift+Right clicking Gatorade Bucket Block with filled Squeeze Bottle will empty the Squeeze Bottle into the Gatorade Bucket Block
+- Right clicking Gatorade Bucket Block with a gatorade fluid bucket will empty the bucket into the Gatorade Bucket Block
+- Right clicking Gatorade Bucket Block with an empty Squeeze Bottle will fill the Squeeze Bottle
+- Gatorade Bucket Block should only accept gatorade fluid
+- Gatorade Bucket Block should use [Capabilities.FluidHandler.ENTITY or Capabilities.FluidHandler.BLOCK](https://docs.neoforged.net/docs/datastorage/capabilities/)
+- Can be filled with Gatorade Fluid via:
+    - Standardized fluid containers, such as buckets and tanks
+    - The Gatorade Squeeze Bottle
+    - Fluid pipes
+
+### Behavior
+#### Electrolytes
+- Add electrolytes bar above food bar
+- Electrolytes should deplete with time, movement, sprinting
+- Electrolytes bar should only show in survival mode and when GUI is shown
+- Electrolytes should not deplete in creative mode
+- Electrolytes should be restored by drinking Gatorade fluids
+- High electrolytes should add haste, speed, and jump boost effects
+- Low electrolytes should add slowness, mining fatigue, and hunger effects
+
+#### Config Options
+- Add config option to enable/disable chaos mode
+- Add config option to enable/disable electrolytes system
+- Add config option to configure electrolytes tick decay rate
+- Add config option to configure electrolytes sprint decay rate
+- Add config option to configure electrolytes jump decay rate
+- Add config option to configure electrolytes movement decay rate
+- Add config option to configure max electrolytes
+- Add config option to configure default electrolytes
+- Add config option to enable/disable emptyable squeeze bottle

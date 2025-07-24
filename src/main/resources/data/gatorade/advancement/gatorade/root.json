@@ -1,0 +1,22 @@
+{
+	"display": {
+		"icon": {
+			"id": "gatorade:squeeze_bottle"
+		},
+		"title": {
+			"translate": "advancement.gatorade.a_whole_new_world.title"
+		},
+		"description": {
+			"translate": "advancement.gatorade.a_whole_new_world.desc"
+		},
+		"background": "block/dirt",
+		"announce_to_chat": false,
+		"show_toast": false,
+		"frame": "task"
+	},
+	"criteria": {
+		"location": {
+			"trigger": "minecraft:location"
+		}
+	}
+}

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gatorade:item/gatorade_bottle_full",
+    "layer1": "gatorade:item/gatorade_bottle_full_overlay"
+  }
+}
