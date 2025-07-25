@@ -34,7 +34,6 @@ public class ModAttachments {
         ATTACHMENT_TYPES.register("electrolytes", () -> AttachmentType.builder(() -> new ElectrolytesData())
             .serialize(ELECTROLYTES_CODEC.fieldOf("electrolytes"))
             .sync(ElectrolytesData.STREAM_CODEC)
-            .copyOnDeath()
             .build()
     );
     
