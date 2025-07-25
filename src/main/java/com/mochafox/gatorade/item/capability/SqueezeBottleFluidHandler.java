@@ -4,7 +4,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
-import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 
 import com.mochafox.gatorade.item.ModDataComponents;
@@ -13,7 +12,6 @@ import com.mochafox.gatorade.Config;
 
 /**
  * Fluid handler implementation for Squeeze Bottle items.
- * Allows partial filling/draining and only accepts Gatorade fluids by default.
  */
 public class SqueezeBottleFluidHandler implements IFluidHandlerItem {
     private static final int CAPACITY = 1000; // mB capacity
@@ -143,12 +141,10 @@ public class SqueezeBottleFluidHandler implements IFluidHandlerItem {
      * Checks if a fluid is a Gatorade fluid that this bottle can accept
      */
     private boolean isGatoradeFluid(Fluid fluid) {
-        // If chaos mode is enabled, accept any fluid
         if (Config.CHAOS_MODE.get()) {
             return true;
         }
-        
-        // Check if the fluid is an instance of any GatoradeFluid
+
         return fluid instanceof GatoradeFluid;
     }
 }

@@ -12,8 +12,6 @@ import com.mochafox.gatorade.Config;
 
 /**
  * BlockEntity for the Gatorade Cooler Block that handles fluid storage.
- * Uses Capabilities.FluidHandler.BLOCK for fluid management.
- * Data persistence is handled through data components on the block item.
  */
 public class GatoradeCoolerBlockEntity extends BlockEntity {
     private static final int CAPACITY = 16000; // 16 buckets (16,000 mB) capacity
@@ -23,29 +21,18 @@ public class GatoradeCoolerBlockEntity extends BlockEntity {
         super(ModBlockEntities.GATORADE_COOLER_BLOCK_ENTITY.get(), pos, blockState);
     }
 
-    /**
-     * Gets the fluid handler capability for this block entity.
-     */
     public IFluidHandler getFluidHandler() {
         return new GatoradeCoolerFluidHandler();
     }
 
-    /**
-     * Checks if a fluid is a Gatorade fluid that this cooler can accept
-     */
     private boolean isGatoradeFluid(net.minecraft.world.level.material.Fluid fluid) {
-        // If chaos mode is enabled, accept any fluid
         if (Config.CHAOS_MODE.get()) {
             return true;
         }
         
-        // Check if the fluid is an instance of any GatoradeFluid
         return fluid instanceof GatoradeFluid;
     }
 
-    /**
-     * Internal fluid handler implementation for the Gatorade Cooler Block Entity.
-     */
     private class GatoradeCoolerFluidHandler implements IFluidHandler {
 
         @Override

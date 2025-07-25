@@ -100,6 +100,7 @@ public class ElectrolytesHudOverlay implements GuiLayer {
             }
         }
         
+        // TODO: migrate to atlas
         return ResourceLocation.fromNamespaceAndPath(Gatorade.MODID, "textures/gui/electrolytes/" + iconName + ".png");
     }
 }

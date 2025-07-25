@@ -29,6 +29,7 @@
 ### Behavior
 - Electrolytes should deplete with tool use
 - Electrolytes should deplete when jumping and swimming
+
 ### Blocks & Items
 #### Plastic Gatorade Bottle
 - Single use item that is pre-filled with a gatorade fluid
@@ -56,6 +57,9 @@
   - Blue Cherry
   - Green Apple
 
+### Misc
+- Migrate Electrolytes bar images to atlas
+
 ## :: V1.0.0 :: TODO ::
 
 ### Biome / World Gen
@@ -75,20 +79,6 @@
 #### Gatorade Bucket Item
 - When emptied of fluid, it should take the texture of the empty gatorade bucket, not the minecraft bucket
 - Should fully do nothing in creative mode
-
-### Advancements
-- Add an advancement for drinking a new type of gatorade fluid
-- For drinking first gatorade fluid
-- Add an advancement for drinking 100 bottles of gatorade
-- For making the cooler
-- For drinking every type of gatorade fluid
-
-```java
-if (livingEntity instanceof ServerPlayer serverPlayer) {
-    CriteriaTriggers.CONSUME_ITEM.trigger(serverPlayer, stack);
-    serverPlayer.awardStat(Stats.ITEM_USED.get(this));
-}
-```
 
 ### Misc
 - Add a couple florbalistican songs to the mod
@@ -131,6 +121,13 @@ if (livingEntity instanceof ServerPlayer serverPlayer) {
 - Add config option to configure max electrolytes
 - Add config option to configure default electrolytes
 - Add config option to enable/disable emptyable squeeze bottle
+
+### Advancements
+- Add an advancement for drinking a new type of gatorade fluid
+- For drinking first gatorade fluid
+- Add an advancement for drinking 100 bottles of gatorade
+- For making the cooler
+- For drinking every type of gatorade fluid
 
 ### Misc
 - Establish crafting recipes

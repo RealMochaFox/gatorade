@@ -19,7 +19,7 @@ public record GatoradeFluidItemTintSource(int defaultColor) implements ItemTintS
         .xmap(color -> new GatoradeFluidItemTintSource(ARGB.opaque(color)), source -> source.defaultColor);
 
     public GatoradeFluidItemTintSource() {
-        this(ARGB.opaque(Gatorade.DEFAULT_FLUID_COLOR)); // Default color for empty squeeze bottle
+        this(ARGB.opaque(Gatorade.DEFAULT_FLUID_COLOR));
     }
 
     @Override

@@ -9,22 +9,17 @@
     "description": {
       "translate": "advancement.gatorade.drink_100_gatorade_bottles.desc"
     },
-    "frame": "task",
+    "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": false
+    "hidden": true
   },
-  "parent": "gatorade:gatorade/drink_first_gatorade",
+  "parent": "gatorade:gatorade/drink_new_flavor",
   "criteria": {
     "drink_100_gatorade": {
-      "trigger": "minecraft:consume_item",
+      "trigger": "gatorade:drink_gatorade",
       "conditions": {
-        "item": {
-          "items": [
-            "gatorade:squeeze_bottle"
-          ],
-          "count": 100
-        }
+        "min_count": 100
       }
     }
   }

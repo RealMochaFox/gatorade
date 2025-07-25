@@ -25,13 +25,6 @@ public class InfiniteElectrolyteDrinkItem extends Item {
         super(properties);
     }
 
-    /**
-     * Creates a new InfiniteElectrolyteDrinkItem with the appropriate properties.
-     * This method encapsulates the item configuration logic.
-     * 
-     * @param properties the base item properties to configure
-     * @return a new InfiniteElectrolyteDrinkItem instance with configured properties
-     */
     public static InfiniteElectrolyteDrinkItem create(Item.Properties properties) {
         return new InfiniteElectrolyteDrinkItem(properties.stacksTo(1)
             .food(new FoodProperties.Builder()

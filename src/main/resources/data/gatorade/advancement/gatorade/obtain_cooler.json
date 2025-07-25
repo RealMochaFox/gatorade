@@ -12,19 +12,20 @@
     "frame": "task",
     "show_toast": true,
     "announce_to_chat": true,
-    "hidden": false
+    "hidden": true
   },
   "parent": "gatorade:gatorade/root",
   "criteria": {
-    "drink_gatorade": {
-      "trigger": "minecraft:consume_item",
+    "obtain_cooler": {
+      "trigger": "minecraft:inventory_changed",
       "conditions": {
-        "item": {
-          "items": [
-            "gatorade:squeeze_bottle"
-          ],
-          "count": 1
-        }
+        "items": [
+          {
+            "items": [
+              "gatorade:gatorade_cooler_block"
+            ]
+          }
+        ]
       }
     }
   }

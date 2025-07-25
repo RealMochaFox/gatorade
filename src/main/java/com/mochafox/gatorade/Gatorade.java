@@ -10,9 +10,9 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
+import com.mochafox.gatorade.advancement.ModAdvancementTriggers;
 import com.mochafox.gatorade.block.ModBlocks;
 import com.mochafox.gatorade.block.ModBlockEntities;
-import com.mochafox.gatorade.electrolytes.ModAttachments;
 import com.mochafox.gatorade.fluid.ModFluids;
 import com.mochafox.gatorade.item.CapabilityHandler;
 import com.mochafox.gatorade.item.ModCreativeModeTabs;
@@ -47,6 +47,7 @@ public class Gatorade {
         ModFluids.register(modEventBus);
         ModCreativeModeTabs.register(modEventBus);
         ModAttachments.register(modEventBus);
+        ModAdvancementTriggers.register(modEventBus);
 
         // Register capabilities
         modEventBus.addListener(CapabilityHandler::registerCapabilities);

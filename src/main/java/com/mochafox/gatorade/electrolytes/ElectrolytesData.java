@@ -1,6 +1,8 @@
 package com.mochafox.gatorade.electrolytes;
 
 import com.mochafox.gatorade.Config;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -11,6 +13,18 @@ import net.minecraft.world.entity.player.Player;
  * Data class for tracking a player's electrolyte levels.
  */
 public class ElectrolytesData {
+    public static final Codec<ElectrolytesData> CODEC = RecordCodecBuilder.create(instance -> 
+        instance.group(
+            Codec.INT.fieldOf("electrolytes").forGetter(ElectrolytesData::getElectrolytes),
+            Codec.LONG.fieldOf("lastDecayTime").forGetter(ElectrolytesData::getLastDecayTime)
+        ).apply(instance, (electrolytes, lastDecayTime) -> {
+            ElectrolytesData data = new ElectrolytesData();
+            data.setElectrolytes(electrolytes);
+            data.setLastDecayTime(lastDecayTime);
+            return data;
+        })
+    );
+    
     public static int getMaxElectrolytes() {
         return Config.MAX_ELECTROLYTES.get();
     }

@@ -1,6 +1,7 @@
 package com.mochafox.gatorade.electrolytes;
 
 import net.minecraft.world.entity.player.Player;
+import com.mochafox.gatorade.ModAttachments;
 
 /**
  * Utility class for managing player electrolytes.

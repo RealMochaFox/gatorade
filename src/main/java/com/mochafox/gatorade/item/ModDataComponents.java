@@ -16,9 +16,7 @@ public class ModDataComponents {
     public static final DeferredRegister<DataComponentType<?>> DATA_COMPONENT_TYPES = 
         DeferredRegister.create(Registries.DATA_COMPONENT_TYPE, Gatorade.MODID);
 
-    /**
-     * Data component for storing fluid content in squeeze bottles
-     */
+    // Data component for storing fluid content in squeeze bottles
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<SimpleFluidContent>> SQUEEZE_BOTTLE_FLUID_CONTENT = 
         DATA_COMPONENT_TYPES.register("squeeze_bottle_fluid_content", 
             () -> DataComponentType.<SimpleFluidContent>builder()
@@ -26,9 +24,7 @@ public class ModDataComponents {
                 .networkSynchronized(SimpleFluidContent.STREAM_CODEC)
                 .build());
 
-    /**
-     * Data component for storing fluid content in gatorade bucket blocks
-     */
+    // Data component for storing fluid content in gatorade bucket blocks
     public static final DeferredHolder<DataComponentType<?>, DataComponentType<SimpleFluidContent>> GATORADE_BUCKET_FLUID_CONTENT = 
         DATA_COMPONENT_TYPES.register("gatorade_bucket_fluid_content", 
             () -> DataComponentType.<SimpleFluidContent>builder()

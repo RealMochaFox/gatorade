@@ -3,6 +3,7 @@ package com.mochafox.gatorade.item.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -25,6 +26,7 @@ import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 
+import com.mochafox.gatorade.advancement.util.AdvancementUtil;
 import com.mochafox.gatorade.Config;
 import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.block.entity.GatoradeCoolerBlockEntity;
@@ -33,7 +35,6 @@ import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 
 /**
  * Consumable item representing a squeeze bottle of Gatorade that can hold fluid.
- * When consumed, restores electrolytes at a 1:1 ratio (100mB = 100 electrolytes).
  */
 public class SqueezeBottleItem extends Item {
     private static final int CAPACITY = 1000; // mB capacity
@@ -43,13 +44,6 @@ public class SqueezeBottleItem extends Item {
         super(properties);
     }
     
-    /**
-     * Creates a new SqueezeBottleItem with the appropriate properties.
-     * This method encapsulates the item configuration logic.
-     * 
-     * @param properties the base item properties to configure
-     * @return a new SqueezeBottleItem instance with configured properties
-     */
     public static SqueezeBottleItem create(Item.Properties properties) {
         return new SqueezeBottleItem(properties.stacksTo(1)
             .food(new FoodProperties.Builder()
@@ -95,10 +89,6 @@ public class SqueezeBottleItem extends Item {
         
         // Check if we're clicking on a Gatorade Cooler Block
         BlockEntity blockEntity = level.getBlockEntity(pos);
-        // Check if block is a fluid source
-        BlockState clickedState = level.getBlockState(pos);
-        FluidState fluidState = clickedState.getFluidState();
-        Gatorade.LOGGER.info(descriptionId + " clicked at " + pos + " with fluid: " + fluidState);
         if (blockEntity instanceof GatoradeCoolerBlockEntity gatoradeCooler) {
             IFluidHandler blockFluidHandler = gatoradeCooler.getFluidHandler();
             IFluidHandlerItem itemFluidHandler = itemStack.getCapability(Capabilities.FluidHandler.ITEM);
@@ -212,6 +202,11 @@ public class SqueezeBottleItem extends Item {
                 // Show feedback to player
                 if (electrolytesEnabled) {
                     player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.drank.electrolytes", drained.getAmount()), true);
+                }
+
+                // Track advancement progress
+                if (player instanceof ServerPlayer serverPlayer) {
+                    AdvancementUtil.recordGatoradeConsumption(serverPlayer, drained.getFluid());
                 }
 
                 // Return the updated container

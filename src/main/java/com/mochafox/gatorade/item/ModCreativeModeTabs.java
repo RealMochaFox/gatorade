@@ -59,7 +59,7 @@ public class ModCreativeModeTabs {
                     FluidStack gatoradeFluid = 
                         new FluidStack(FruitPunchGatoradeFluid.SOURCE.get(), 1000);
                     fluidHandler.fill(gatoradeFluid, IFluidHandler.FluidAction.EXECUTE);
-                    filledBottle = fluidHandler.getContainer(); // Get the updated container
+                    filledBottle = fluidHandler.getContainer();
                 }
                 output.accept(filledBottle);
                 
