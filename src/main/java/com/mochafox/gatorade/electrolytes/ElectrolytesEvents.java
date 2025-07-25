@@ -36,6 +36,11 @@ public class ElectrolytesEvents {
         if (!Config.ENABLE_ELECTROLYTES.get()) {
             return;
         }
+
+        // In creative mode, electrolytes are not active
+        if (player.isCreative()) {
+            return;
+        }
         
         // Tick electrolytes (decay over time and with activity)
         ElectrolytesUtil.tickElectrolytes(player);

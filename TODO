@@ -62,9 +62,6 @@
 - Dynamically determine when all fluids have been drank for advancements by looking at the fluids registered in the mod
 
 ## :: V1.0.1 :: TODO ::
-### Behavior
-- Electrolytes should fully do nothing in creative mode
-
 ### Misc
 - Fix issue where messages are displayed weirdly when bottle interacts with a bucket
 
@@ -115,6 +112,7 @@
 - Electrolytes should be restored by drinking Gatorade fluids
 - High electrolytes should add haste, speed, and jump boost effects
 - Low electrolytes should add slowness, mining fatigue, and hunger effects
+- Electrolytes should fully do nothing in creative mode
 
 #### Config Options
 - Add config option to enable/disable chaos mode
