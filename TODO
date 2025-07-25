@@ -79,11 +79,11 @@
 
 #### Gatorade Bucket Item
 - When emptied of fluid, it should take the texture of the empty gatorade bucket, not the minecraft bucket
-- Should fully do nothing in creative mode
 
 ### Misc
 - Add a couple florbalistican songs to the mod
 - Fix issue where messages are displayed weirdly when bottle interacts with a bucket
+- Electrolytes should fully do nothing in creative mode
 
 ## :: V1.0.0 :: Completed Tasks ::
 ### Blocks & Items
