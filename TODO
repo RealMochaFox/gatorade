@@ -59,7 +59,6 @@
 
 ### Misc
 - Migrate Electrolytes bar images to atlas
-- Dynamically determine when all fluids have been drank for advancements by looking at the fluids registered in the mod
 
 ## :: V1.0.1 :: TODO ::
 ### Misc
@@ -131,6 +130,7 @@
 - Add an advancement for drinking 100 bottles of gatorade
 - For making the cooler
 - For drinking every type of gatorade fluid
+- Dynamically determine when all fluids have been drank for advancements by looking at the fluids registered in the mod
 
 ### Misc
 - Establish crafting recipes

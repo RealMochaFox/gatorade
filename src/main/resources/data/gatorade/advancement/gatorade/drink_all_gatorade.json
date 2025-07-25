@@ -23,10 +23,7 @@
   "parent": "gatorade:gatorade/drink_new_flavor",
   "criteria": {
     "drink_all_gatorade": {
-      "trigger": "gatorade:drink_unique_gatorade",
-      "conditions": {
-        "min_unique_count": 14
-      }
+      "trigger": "gatorade:drink_all_gatorade"
     }
   }
 }

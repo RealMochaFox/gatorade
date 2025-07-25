@@ -8,6 +8,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 import com.mochafox.gatorade.Gatorade;
+import com.mochafox.gatorade.advancement.triggers.DrinkAllGatoradeTrigger;
 import com.mochafox.gatorade.advancement.triggers.DrinkGatoradeTrigger;
 import com.mochafox.gatorade.advancement.triggers.DrinkUniqueGatoradeTrigger;
 
@@ -23,6 +24,9 @@ public class ModAdvancementTriggers {
 
     public static final Supplier<DrinkUniqueGatoradeTrigger> DRINK_UNIQUE_GATORADE_TRIGGER =
             TRIGGER_TYPES.register("drink_unique_gatorade", DrinkUniqueGatoradeTrigger::new);
+
+    public static final Supplier<DrinkAllGatoradeTrigger> DRINK_ALL_GATORADE_TRIGGER =
+            TRIGGER_TYPES.register("drink_all_gatorade", DrinkAllGatoradeTrigger::new);
 
     public static void register(IEventBus eventBus) {
         TRIGGER_TYPES.register(eventBus);
