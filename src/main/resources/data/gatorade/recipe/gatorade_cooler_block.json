@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "WTW",
+    "RCR",
+    "RRR"
+  ],
+  "key": {
+    "W": "minecraft:white_terracotta",
+    "T": "#gatorade:copper_trapdoors",
+    "R": "minecraft:resin_block",
+    "C": "minecraft:cauldron"
+  },
+  "result": {
+    "id": "gatorade:gatorade_cooler_block",
+    "count": 1
+  }
+}

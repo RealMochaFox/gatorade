@@ -29,6 +29,13 @@
 ### Behavior
 - Electrolytes should deplete with tool use
 - Electrolytes should deplete when jumping and swimming
+### Blocks & Items
+#### Plastic Gatorade Bottle
+- Single use item that is pre-filled with a gatorade fluid
+- Right clicking with a filled Plastic Gatorade Bottle should consume the item and fill the players electrolytes bar
+- Drink at the same rate as a Squeeze Bottle
+- Contain the same amount of fluid as a Squeeze Bottle
+- Should have a different texture than the Squeeze Bottle
 
 ### Config Options
 - Config option to disable each gatorade type. Config name: Disabled gatorade types; Type: String array of fluid names/ids?
@@ -57,13 +64,6 @@
 - Gatorade springs should support spawning all kinds of gatorade fluids
 
 ### Blocks & Items
-#### Plastic Gatorade Bottle
-- Single use item that is pre-filled with a gatorade fluid
-- Right clicking with a filled Plastic Gatorade Bottle should consume the item and fill the players electrolytes bar
-- Drink at the same rate as a Squeeze Bottle
-- Contain the same amount of fluid as a Squeeze Bottle
-- Should have a different texture than the Squeeze Bottle
-
 #### Squeeze Bottle
 - Right clicking Squeeze Bottle aimed at Gatorade Fluid should fill the Squeeze Bottle with that fluid [?]
 - Empty Squeeze Bottle should have a different texture than the filled Squeeze Bottle
@@ -78,10 +78,10 @@
 
 ### Advancements
 - Add an advancement for drinking a new type of gatorade fluid
-- For drinking first gatorade fluid [%]
-- Add an advancement for drinking 100 bottles of gatorade [%]
-- For making the cooler [%]
-- For drinking every type of gatorade fluid [%]
+- For drinking first gatorade fluid
+- Add an advancement for drinking 100 bottles of gatorade
+- For making the cooler
+- For drinking every type of gatorade fluid
 
 ```java
 if (livingEntity instanceof ServerPlayer serverPlayer) {
@@ -92,7 +92,6 @@ if (livingEntity instanceof ServerPlayer serverPlayer) {
 
 ### Misc
 - Add a couple florbalistican songs to the mod
-- Establish crafting recipes
 - Fix issue where messages are displayed weirdly when bottle interacts with a bucket
 
 ## :: V1.0.0 :: Completed Tasks ::
@@ -132,3 +131,6 @@ if (livingEntity instanceof ServerPlayer serverPlayer) {
 - Add config option to configure max electrolytes
 - Add config option to configure default electrolytes
 - Add config option to enable/disable emptyable squeeze bottle
+
+### Misc
+- Establish crafting recipes

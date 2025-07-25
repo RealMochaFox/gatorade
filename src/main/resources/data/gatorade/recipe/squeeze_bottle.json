@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "OGO",
+    "TBT",
+    "TTT"
+  ],
+  "key": {
+    "O": "minecraft:orange_terracotta",
+    "G": "#gatorade:copper_grates",
+    "B": "minecraft:glass_bottle",
+    "T": "minecraft:green_terracotta"
+  },
+  "result": {
+    "id": "gatorade:squeeze_bottle",
+    "count": 1
+  }
+}
