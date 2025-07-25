@@ -3,7 +3,7 @@ package com.mochafox.gatorade.advancement.util;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.level.material.Fluid;
 import com.mochafox.gatorade.advancement.ModAdvancementTriggers;
-import com.mochafox.gatorade.advancement.data.GatoradeAdvancementData;
+import com.mochafox.gatorade.advancement.GatoradeAdvancementData;
 import com.mochafox.gatorade.ModAttachments;
 import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 
