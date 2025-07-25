@@ -22,5 +22,6 @@ public class GatoradeClient {
         modEventBus.addListener(ClientEventHandler::registerGuiLayers);
         modEventBus.addListener(ClientEventHandler::registerClientExtensions);
         modEventBus.addListener(ClientEventHandler::registerItemTintSources);
+        modEventBus.addListener(ClientEventHandler::registerConditionalItemProperties);
     }
 }

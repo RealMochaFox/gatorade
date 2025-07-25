@@ -39,7 +39,7 @@ public class ModCreativeModeTabs {
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> GATORADE_TAB = CREATIVE_MODE_TABS.register("gatorade_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.gatorade"))
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> ModItems.SQUEEZE_BOTTLE.get().getDefaultInstance())
+            .icon(() -> createFilledSqueezeBottle(OrangeGatoradeFluid.SOURCE.get()))
             .displayItems((parameters, output) -> {
                 
                 // Empty squeeze bottle
@@ -52,21 +52,12 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.GATORADE_COOLER_BLOCK.get());
 
                 // Pre-filled squeeze bottle
-                ItemStack filledBottle = new ItemStack(ModItems.SQUEEZE_BOTTLE.get());
-                var fluidHandler = filledBottle.getCapability(Capabilities.FluidHandler.ITEM);
-                if (fluidHandler != null) {
-                    // Fill with fruit punch gatorade
-                    FluidStack gatoradeFluid = 
-                        new FluidStack(FruitPunchGatoradeFluid.SOURCE.get(), 1000);
-                    fluidHandler.fill(gatoradeFluid, IFluidHandler.FluidAction.EXECUTE);
-                    filledBottle = fluidHandler.getContainer();
-                }
-                output.accept(filledBottle);
-                
+                output.accept(createFilledSqueezeBottle(OrangeGatoradeFluid.SOURCE.get()));
+
                 // Fluid buckets for spawning
+                output.accept(OrangeGatoradeFluid.BUCKET.get());
                 output.accept(FruitPunchGatoradeFluid.BUCKET.get());
                 output.accept(LemonLimeGatoradeFluid.BUCKET.get());
-                output.accept(OrangeGatoradeFluid.BUCKET.get());
                 output.accept(CoolBlueGatoradeFluid.BUCKET.get());
                 output.accept(LimeCucumberGatoradeFluid.BUCKET.get());
                 output.accept(LightningBlastGatoradeFluid.BUCKET.get());
@@ -79,6 +70,17 @@ public class ModCreativeModeTabs {
                 output.accept(BlueCherryGatoradeFluid.BUCKET.get());
                 output.accept(GreenAppleGatoradeFluid.BUCKET.get());
             }).build());
+
+    private static ItemStack createFilledSqueezeBottle(net.minecraft.world.level.material.Fluid fluid) {
+        ItemStack filledBottle = new ItemStack(ModItems.SQUEEZE_BOTTLE.get());
+        var fluidHandler = filledBottle.getCapability(Capabilities.FluidHandler.ITEM);
+        if (fluidHandler != null) {
+            FluidStack gatoradeFluid = new FluidStack(fluid, 1000);
+            fluidHandler.fill(gatoradeFluid, IFluidHandler.FluidAction.EXECUTE);
+            filledBottle = fluidHandler.getContainer();
+        }
+        return filledBottle;
+    }
 
     public static void register(IEventBus eventBus) {
         CREATIVE_MODE_TABS.register(eventBus);

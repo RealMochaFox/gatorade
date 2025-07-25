@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "gatorade:item/gatorade_bucket"
+    "model": "gatorade:item/infinite_electrolyte_drink"
   }
 }

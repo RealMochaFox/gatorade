@@ -1,6 +1,7 @@
 package com.mochafox.gatorade.client;
 
 import com.mochafox.gatorade.Gatorade;
+import com.mochafox.gatorade.client.property.HasFluidProperty;
 import com.mochafox.gatorade.fluid.custom.ArcticBlitzGatoradeFluid;
 import com.mochafox.gatorade.fluid.custom.BlueCherryGatoradeFluid;
 import com.mochafox.gatorade.fluid.custom.CoolBlueGatoradeFluid;
@@ -19,6 +20,7 @@ import com.mochafox.gatorade.fluid.custom.StrawberryGatoradeFluid;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
+import net.neoforged.neoforge.client.event.RegisterConditionalItemModelPropertyEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
@@ -40,6 +42,13 @@ public class ClientEventHandler {
         event.register(
             ResourceLocation.fromNamespaceAndPath(Gatorade.MODID, "gatorade_fluid_item_tint_source"),
             GatoradeFluidItemTintSource.MAP_CODEC
+        );
+    }
+
+    public static void registerConditionalItemProperties(RegisterConditionalItemModelPropertyEvent event) {
+        event.register(
+            ResourceLocation.fromNamespaceAndPath(Gatorade.MODID, "has_fluid"),
+            HasFluidProperty.MAP_CODEC
         );
     }
 

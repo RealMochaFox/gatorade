@@ -1,7 +1,13 @@
 {
 	"display": {
 		"icon": {
-			"id": "gatorade:squeeze_bottle"
+			"id": "gatorade:squeeze_bottle",
+			"components": {
+				"gatorade:squeeze_bottle_fluid_content": {
+					"id": "gatorade:orange_gatorade",
+					"amount": 1000
+				}
+			}
 		},
 		"title": {
 			"translate": "advancement.gatorade.a_whole_new_world.title"

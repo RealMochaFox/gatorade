@@ -33,7 +33,7 @@ import com.mochafox.gatorade.item.ModItems;
 @Mod(Gatorade.MODID)
 public class Gatorade {
     public static final String MODID = "gatorade";
-    public static final int DEFAULT_FLUID_COLOR = 0x3C44AA;
+    public static final int DEFAULT_FLUID_COLOR = 0xffff8000; // Orange
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public Gatorade(IEventBus modEventBus, ModContainer modContainer) {
