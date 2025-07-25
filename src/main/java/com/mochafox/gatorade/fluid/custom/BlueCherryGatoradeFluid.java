@@ -38,6 +38,6 @@ public class BlueCherryGatoradeFluid extends GatoradeFluid.SourceGatoradeFluid {
 
     @Override
     public int getTintColor() {
-        return 0xff4060ff; // blue-purple with full alpha
+        return 0x664060ff; // blue-purple with water-level transparency
     }
 }

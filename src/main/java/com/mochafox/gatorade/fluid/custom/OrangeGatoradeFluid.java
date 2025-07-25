@@ -38,6 +38,6 @@ public class OrangeGatoradeFluid extends GatoradeFluid.SourceGatoradeFluid {
 
     @Override
     public int getTintColor() {
-        return 0xffff8000; // orange with full alpha
+        return 0x66ff8000; // orange with water-level transparency
     }
 }

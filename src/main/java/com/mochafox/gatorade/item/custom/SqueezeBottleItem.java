@@ -5,6 +5,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -17,9 +18,7 @@ import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
@@ -261,10 +260,11 @@ public class SqueezeBottleItem extends Item {
     public int getBarColor(ItemStack itemStack) {
         Fluid fluid = getFluid(itemStack);
         if(fluid instanceof GatoradeFluid) {
-            // Use the fluid's tint color if it's a Gatorade fluid
-            return ((GatoradeFluid) fluid).getTintColor();
+            GatoradeFluid gatoradeFluid = (GatoradeFluid) fluid;
+            int tintColor = gatoradeFluid.getTintColor();
+            return ARGB.opaque(tintColor);
         }
 
-        return Gatorade.DEFAULT_FLUID_COLOR;
+        return ARGB.opaque(Gatorade.DEFAULT_FLUID_COLOR);
     }
 }

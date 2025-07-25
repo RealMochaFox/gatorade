@@ -38,6 +38,6 @@ public class MidnightIceGatoradeFluid extends GatoradeFluid.SourceGatoradeFluid 
 
     @Override
     public int getTintColor() {
-        return 0xff200040; // dark purple with full alpha
+        return 0x66200040; // dark purple with water-level transparency
     }
 }

@@ -38,6 +38,6 @@ public class GreenAppleGatoradeFluid extends GatoradeFluid.SourceGatoradeFluid {
 
     @Override
     public int getTintColor() {
-        return 0xff40ff40; // bright green with full alpha
+        return 0x6640ff40; // bright green with water-level transparency
     }
 }
