@@ -1,7 +1,8 @@
 {
   "parent": "minecraft:block/block",
   "textures": {
-    "all": "gatorade:block/gatorade_cooler"
+    "all": "gatorade:block/gatorade_cooler",
+    "particle": "gatorade:block/gatorade_cooler"
   },
   "elements": [
         {

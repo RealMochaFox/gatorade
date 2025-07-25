@@ -75,7 +75,6 @@
 
 #### Gatorade Cooler Block
 - Right clicking Gatorade Cooler Block with an empty gatorade fluid bucket will fill the bucket from the Gatorade Cooler Block
-- need particle effects for buket
 
 #### Gatorade Bucket Item
 - When emptied of fluid, it should take the texture of the empty gatorade bucket, not the minecraft bucket
