@@ -59,6 +59,7 @@
 
 ### Misc
 - Migrate Electrolytes bar images to atlas
+- Dynamically determine when all fluids have been drank for advancements by looking at the fluids registered in the mod
 
 ## :: V1.0.0 :: TODO ::
 

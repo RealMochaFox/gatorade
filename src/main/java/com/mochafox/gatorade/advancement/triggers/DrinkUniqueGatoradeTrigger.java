@@ -24,9 +24,6 @@ public class DrinkUniqueGatoradeTrigger extends SimpleCriterionTrigger<DrinkUniq
         this.trigger(player, triggerInstance -> triggerInstance.matches(uniqueFluids));
     }
 
-    // TODO: For drinks all gatorade types advancement
-    // - Dynamically determine unique fluid count based on registered gatorade types
-    
     public record TriggerInstance(Optional<ContextAwarePredicate> player, int minUniqueCount)
             implements SimpleCriterionTrigger.SimpleInstance {
         
