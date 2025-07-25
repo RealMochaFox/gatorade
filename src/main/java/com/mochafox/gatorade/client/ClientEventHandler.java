@@ -2,20 +2,8 @@ package com.mochafox.gatorade.client;
 
 import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.client.property.HasFluidProperty;
-import com.mochafox.gatorade.fluid.custom.ArcticBlitzGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.BlueCherryGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.CoolBlueGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.FruitPunchGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.GlacierCherryGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.GlacierFreezeGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.GrapeGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.GreenAppleGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.LemonLimeGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.LightningBlastGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.LimeCucumberGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.MidnightIceGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.OrangeGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.StrawberryGatoradeFluid;
+import com.mochafox.gatorade.fluid.ModFluids;
+import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
@@ -54,20 +42,12 @@ public class ClientEventHandler {
 
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         // Register all Gatorade fluid client extensions
-        registerGatoradeFluidExtension(event, FruitPunchGatoradeFluid.TYPE.get(), 0xFFFF0000);
-        registerGatoradeFluidExtension(event, LemonLimeGatoradeFluid.TYPE.get(), 0xFF00FF00);
-        registerGatoradeFluidExtension(event, OrangeGatoradeFluid.TYPE.get(), 0xFFFF8000);
-        registerGatoradeFluidExtension(event, CoolBlueGatoradeFluid.TYPE.get(), 0xFF0080FF);
-        registerGatoradeFluidExtension(event, LimeCucumberGatoradeFluid.TYPE.get(), 0xFF80FF80);
-        registerGatoradeFluidExtension(event, LightningBlastGatoradeFluid.TYPE.get(), 0xFFFFFF00);
-        registerGatoradeFluidExtension(event, MidnightIceGatoradeFluid.TYPE.get(), 0xFF200040);
-        registerGatoradeFluidExtension(event, GlacierFreezeGatoradeFluid.TYPE.get(), 0xFF40C0FF);
-        registerGatoradeFluidExtension(event, GlacierCherryGatoradeFluid.TYPE.get(), 0xFFFF4080);
-        registerGatoradeFluidExtension(event, ArcticBlitzGatoradeFluid.TYPE.get(), 0xFFC0FFFF);
-        registerGatoradeFluidExtension(event, GrapeGatoradeFluid.TYPE.get(), 0xFF8000FF);
-        registerGatoradeFluidExtension(event, StrawberryGatoradeFluid.TYPE.get(), 0xFFFF6080);
-        registerGatoradeFluidExtension(event, BlueCherryGatoradeFluid.TYPE.get(), 0xFF4060FF);
-        registerGatoradeFluidExtension(event, GreenAppleGatoradeFluid.TYPE.get(), 0xFF40FF40);
+        ModFluids.FLUIDS.getEntries().forEach(entry -> {
+            if (entry.get() instanceof GatoradeFluid.SourceGatoradeFluid) {
+                GatoradeFluid.SourceGatoradeFluid fluid = (GatoradeFluid.SourceGatoradeFluid) entry.get();
+                registerGatoradeFluidExtension(event, fluid.getFluidType(), fluid.getTintColor());
+            }
+        });
     }
 
     /**

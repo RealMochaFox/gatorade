@@ -14,20 +14,9 @@ import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.block.ModBlocks;
-import com.mochafox.gatorade.fluid.custom.ArcticBlitzGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.BlueCherryGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.CoolBlueGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.FruitPunchGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.GlacierCherryGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.GlacierFreezeGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.GrapeGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.GreenAppleGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.LemonLimeGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.LightningBlastGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.LimeCucumberGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.MidnightIceGatoradeFluid;
+import com.mochafox.gatorade.fluid.ModFluids;
+import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 import com.mochafox.gatorade.fluid.custom.OrangeGatoradeFluid;
-import com.mochafox.gatorade.fluid.custom.StrawberryGatoradeFluid;
 
 /**
  * Registry class for mod creative mode tabs.
@@ -55,20 +44,12 @@ public class ModCreativeModeTabs {
                 output.accept(createFilledSqueezeBottle(OrangeGatoradeFluid.SOURCE.get()));
 
                 // Fluid buckets for spawning
-                output.accept(OrangeGatoradeFluid.BUCKET.get());
-                output.accept(FruitPunchGatoradeFluid.BUCKET.get());
-                output.accept(LemonLimeGatoradeFluid.BUCKET.get());
-                output.accept(CoolBlueGatoradeFluid.BUCKET.get());
-                output.accept(LimeCucumberGatoradeFluid.BUCKET.get());
-                output.accept(LightningBlastGatoradeFluid.BUCKET.get());
-                output.accept(MidnightIceGatoradeFluid.BUCKET.get());
-                output.accept(GlacierFreezeGatoradeFluid.BUCKET.get());
-                output.accept(GlacierCherryGatoradeFluid.BUCKET.get());
-                output.accept(ArcticBlitzGatoradeFluid.BUCKET.get());
-                output.accept(GrapeGatoradeFluid.BUCKET.get());
-                output.accept(StrawberryGatoradeFluid.BUCKET.get());
-                output.accept(BlueCherryGatoradeFluid.BUCKET.get());
-                output.accept(GreenAppleGatoradeFluid.BUCKET.get());
+                ModFluids.FLUIDS.getEntries().forEach(entry -> {
+                    if (entry.get() instanceof GatoradeFluid.SourceGatoradeFluid) {
+                        GatoradeFluid.SourceGatoradeFluid fluid = (GatoradeFluid.SourceGatoradeFluid) entry.get();
+                        output.accept(fluid.getBucket());
+                    }
+                });
             }).build());
 
     private static ItemStack createFilledSqueezeBottle(net.minecraft.world.level.material.Fluid fluid) {
