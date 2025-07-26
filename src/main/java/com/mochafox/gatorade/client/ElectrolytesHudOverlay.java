@@ -12,6 +12,8 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.neoforge.client.gui.GuiLayer;
 
+import javax.annotation.Nonnull;
+
 /**
  * HUD overlay that renders the electrolytes bar above the food bar.
  */
@@ -19,7 +21,7 @@ public class ElectrolytesHudOverlay implements GuiLayer {
     private static final int ICON_SIZE = 9;
     
     @Override
-    public void render(GuiGraphics guiGraphics, DeltaTracker deltaTracker) {
+    public void render(@Nonnull GuiGraphics guiGraphics, @Nonnull DeltaTracker deltaTracker) {
         Minecraft minecraft = Minecraft.getInstance();
         
         // Check if electrolytes system is enabled
@@ -28,7 +30,7 @@ public class ElectrolytesHudOverlay implements GuiLayer {
         }
         
         // Only render in survival/adventure mode and when not in spectator
-        if (!minecraft.options.hideGui && minecraft.gameMode.canHurtPlayer() && minecraft.player != null) {
+        if (!minecraft.options.hideGui && minecraft.gameMode != null && minecraft.gameMode.canHurtPlayer() && minecraft.player != null) {
             Player player = minecraft.player;
             
             int screenWidth = guiGraphics.guiWidth();

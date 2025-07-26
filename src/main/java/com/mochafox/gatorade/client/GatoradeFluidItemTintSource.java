@@ -2,6 +2,9 @@ package com.mochafox.gatorade.client;
 
 import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import com.mojang.serialization.MapCodec;
 
 import net.minecraft.client.color.item.ItemTintSource;
@@ -23,7 +26,7 @@ public record GatoradeFluidItemTintSource(int defaultColor) implements ItemTintS
     }
 
     @Override
-    public int calculate(ItemStack stack, ClientLevel level, LivingEntity entity) {
+    public int calculate(@Nonnull ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity) {
         IFluidHandlerItem fluidHandler = stack.getCapability(Capabilities.FluidHandler.ITEM);
 
         if (fluidHandler == null)  {

@@ -32,6 +32,8 @@ import com.mochafox.gatorade.block.entity.GatoradeCoolerBlockEntity;
 import com.mochafox.gatorade.electrolytes.ElectrolytesUtil;
 import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 
+import javax.annotation.Nonnull;
+
 /**
  * Consumable item representing a squeeze bottle of Gatorade that can hold fluid.
  */
@@ -59,7 +61,7 @@ public class SqueezeBottleItem extends Item {
     }
     
     @Override
-    public InteractionResult use(Level level, Player player, InteractionHand hand) {
+    public InteractionResult use(@Nonnull Level level, @Nonnull Player player, @Nonnull InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
         
         if (hasFluid(itemStack)) {
@@ -74,7 +76,7 @@ public class SqueezeBottleItem extends Item {
     }
     
     @Override
-    public InteractionResult useOn(UseOnContext context) {
+    public InteractionResult useOn(@Nonnull UseOnContext context) {
         Level level = context.getLevel();
         BlockPos pos = context.getClickedPos();
         Player player = context.getPlayer();
@@ -133,7 +135,7 @@ public class SqueezeBottleItem extends Item {
         
         // If we can't fill the squeeze bottle, provide appropriate feedback
         if (blockFluid.isEmpty()) {
-            player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.bucket_empty"), true);
+            player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.cooler_empty"), true);
         } else if (!itemFluid.isEmpty()) {
             // Check if squeeze bottle is full or has different fluid
             if (itemFluid.getAmount() >= 1000) {
@@ -167,7 +169,7 @@ public class SqueezeBottleItem extends Item {
             } else {
                 // Bucket is full or incompatible fluid
                 if (blockFluid.isEmpty() || FluidStack.isSameFluidSameComponents(blockFluid, itemFluid)) {
-                    player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.bucket_full"), true);
+                    player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.cooler_full"), true);
                 } else {
                     player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.different_fluid"), true);
                 }
@@ -180,7 +182,7 @@ public class SqueezeBottleItem extends Item {
     }
     
     @Override
-    public ItemStack finishUsingItem(ItemStack itemStack, Level level, LivingEntity livingEntity) {
+    public ItemStack finishUsingItem(@Nonnull ItemStack itemStack, @Nonnull Level level, @Nonnull LivingEntity livingEntity) {
         if (!level.isClientSide && livingEntity instanceof Player player) {
             IFluidHandlerItem fluidHandler = itemStack.getCapability(Capabilities.FluidHandler.ITEM);
             if (fluidHandler != null && hasFluid(itemStack)) {
@@ -243,12 +245,12 @@ public class SqueezeBottleItem extends Item {
     
     // === Fluid Bar === //
     @Override
-    public boolean isBarVisible(ItemStack itemStack) {
+    public boolean isBarVisible(@Nonnull ItemStack itemStack) {
         return hasFluid(itemStack);
     }
     
     @Override
-    public int getBarWidth(ItemStack itemStack) {
+    public int getBarWidth(@Nonnull ItemStack itemStack) {
         if (!hasFluid(itemStack)) {
             return 0;
         }
@@ -257,7 +259,7 @@ public class SqueezeBottleItem extends Item {
     }
     
     @Override
-    public int getBarColor(ItemStack itemStack) {
+    public int getBarColor(@Nonnull ItemStack itemStack) {
         Fluid fluid = getFluid(itemStack);
         if(fluid instanceof GatoradeFluid) {
             GatoradeFluid gatoradeFluid = (GatoradeFluid) fluid;

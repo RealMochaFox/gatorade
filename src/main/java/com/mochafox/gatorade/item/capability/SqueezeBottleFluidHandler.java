@@ -10,6 +10,8 @@ import com.mochafox.gatorade.item.ModDataComponents;
 import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 import com.mochafox.gatorade.Config;
 
+import javax.annotation.Nonnull;
+
 /**
  * Fluid handler implementation for Squeeze Bottle items.
  */
@@ -65,12 +67,12 @@ public class SqueezeBottleFluidHandler implements IFluidHandlerItem {
     }
 
     @Override
-    public boolean isFluidValid(int tank, FluidStack stack) {
+    public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
         return isGatoradeFluid(stack.getFluid());
     }
 
     @Override
-    public int fill(FluidStack resource, FluidAction action) {
+    public int fill(@Nonnull FluidStack resource, @Nonnull FluidAction action) {
         if (container.getCount() != 1 || resource.isEmpty() || !isGatoradeFluid(resource.getFluid())) {
             return 0;
         }
@@ -103,7 +105,7 @@ public class SqueezeBottleFluidHandler implements IFluidHandlerItem {
     }
 
     @Override
-    public FluidStack drain(FluidStack resource, FluidAction action) {
+    public FluidStack drain(@Nonnull FluidStack resource, @Nonnull FluidAction action) {
         if (container.getCount() != 1 || resource.isEmpty() || !FluidStack.isSameFluidSameComponents(resource, getFluid())) {
             return FluidStack.EMPTY;
         }
@@ -111,7 +113,7 @@ public class SqueezeBottleFluidHandler implements IFluidHandlerItem {
     }
 
     @Override
-    public FluidStack drain(int maxDrain, FluidAction action) {
+    public FluidStack drain(int maxDrain, @Nonnull FluidAction action) {
         if (container.getCount() != 1 || maxDrain <= 0) {
             return FluidStack.EMPTY;
         }

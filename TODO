@@ -61,8 +61,13 @@
 - Migrate Electrolytes bar images to atlas
 
 ## :: V1.0.1 :: TODO ::
+### Blocks & Items
+#### Squeeze Bottle
+- Tooltip should show name of fluid inside the Squeeze Bottle
+
 ### Misc
 - Fix issue where messages are displayed weirdly when bottle interacts with a bucket
+- Tweaks to ElectrolytesEvents
 
 ## :: V1.0.0 :: TODO ::
 
@@ -134,3 +139,4 @@
 
 ### Misc
 - Establish crafting recipes
+- Fluids are dynamically iterated

@@ -2,6 +2,8 @@ package com.mochafox.gatorade.item.custom;
 
 import com.mochafox.gatorade.Config;
 import com.mochafox.gatorade.electrolytes.ElectrolytesUtil;
+
+import javax.annotation.Nonnull;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -41,7 +43,7 @@ public class InfiniteElectrolyteDrinkItem extends Item {
     }
     
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity livingEntity) {
+    public ItemStack finishUsingItem(@Nonnull ItemStack stack, @Nonnull Level level, @Nonnull LivingEntity livingEntity) {
         super.finishUsingItem(stack, level, livingEntity);
         
         if (livingEntity instanceof Player player) {
@@ -65,7 +67,7 @@ public class InfiniteElectrolyteDrinkItem extends Item {
 
     
     @Override
-    public InteractionResult use(Level level, Player player, InteractionHand usedHand) {
+    public InteractionResult use(@Nonnull Level level, @Nonnull Player player, @Nonnull InteractionHand usedHand) {
         player.startUsingItem(usedHand);
         return InteractionResult.SUCCESS;
     }

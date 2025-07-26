@@ -10,6 +10,8 @@ import com.mochafox.gatorade.block.ModBlockEntities;
 import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 import com.mochafox.gatorade.Config;
 
+import javax.annotation.Nonnull;
+
 /**
  * BlockEntity for the Gatorade Cooler Block that handles fluid storage.
  */
@@ -53,13 +55,13 @@ public class GatoradeCoolerBlockEntity extends BlockEntity {
         }
 
         @Override
-        public boolean isFluidValid(int tank, FluidStack stack) {
+        public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
             if (tank != 0) return false;
             return isGatoradeFluid(stack.getFluid());
         }
 
         @Override
-        public int fill(FluidStack resource, FluidAction action) {
+        public int fill(@Nonnull FluidStack resource, @Nonnull FluidAction action) {
             if (resource.isEmpty() || !isGatoradeFluid(resource.getFluid())) {
                 return 0;
             }
@@ -92,7 +94,7 @@ public class GatoradeCoolerBlockEntity extends BlockEntity {
         }
 
         @Override
-        public FluidStack drain(FluidStack resource, FluidAction action) {
+        public FluidStack drain(@Nonnull FluidStack resource, @Nonnull FluidAction action) {
             if (resource.isEmpty() || !FluidStack.isSameFluidSameComponents(resource, storedFluid)) {
                 return FluidStack.EMPTY;
             }
@@ -100,7 +102,7 @@ public class GatoradeCoolerBlockEntity extends BlockEntity {
         }
 
         @Override
-        public FluidStack drain(int maxDrain, FluidAction action) {
+        public FluidStack drain(int maxDrain, @Nonnull FluidAction action) {
             if (maxDrain <= 0) {
                 return FluidStack.EMPTY;
             }

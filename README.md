@@ -16,7 +16,7 @@ A NeoForge mod for Minecraft that adds Gatorade as a naturally occurring resourc
 ## Features
 
 ### Gatorade Fluids & Items
-- **Multiple Gatorade Flavors**: Over 15 different Gatorade fluid types
+- **14 Unique Gatorade Flavors**: Including Orange, Cool Blue, Lemon-Lime, Fruit Punch, Grape, Strawberry, Glacier Freeze, Arctic Blitz, Lightning Blast, and more
 - **Squeeze Bottles**: Reusable 1000mB capacity bottles that can be filled, consumed, and refilled
   - Visual fluid level indicator bar
   - Color-coded based on contained fluid
@@ -46,6 +46,9 @@ A NeoForge mod for Minecraft that adds Gatorade as a naturally occurring resourc
 - **Chaos Mode**: Allow fluid containers to accept any fluid type (not just Gatorade)
 - **Emptyable Squeeze Bottles**: Allow emptying bottles back into bucket blocks
 - **Max/Default Electrolytes**: Customizable electrolyte limits and starting values
+
+### Achievements & Progression
+- **Advancement System**: Achievement tree tracking your Gatorade journey
 
 ### Commands
 - **`/electrolytes` command**: Admin commands to get, set, and add electrolytes for testing
