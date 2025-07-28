@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "gatorade:item/gatorade_bucket_empty"
+  }
+}

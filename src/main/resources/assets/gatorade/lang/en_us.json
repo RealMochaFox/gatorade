@@ -17,6 +17,9 @@
   "block.gatorade.gatorade_cooler_block": "Gatorade Cooler",
 
   "item.gatorade.squeeze_bottle": "Squeeze Bottle",
+  
+  "item.gatorade.gatorade_bucket": "Gatorade Bucket",
+
   "item.gatorade.infinite_electrolyte_drink": "Infinite Electrolyte Drink",
   "item.gatorade.fruit_punch_gatorade_bucket": "Fruit Punch Bucket",
   "item.gatorade.lemon_lime_gatorade_bucket": "Lemon Lime Bucket",
@@ -42,6 +45,17 @@
   "item.gatorade.squeeze_bottle.cannot_fill": "Cannot fill the Squeeze Bottle!",
   "item.gatorade.squeeze_bottle.drank.electrolytes": "+%d electrolytes",
   "item.gatorade.infinite_electrolyte_drink.drank.electrolytes": "Refilled electrolytes!",
+
+  "item.gatorade.gatorade_bucket.filled": "Filled Gatorade Bucket with %d mB of %s!",
+  "item.gatorade.gatorade_bucket.emptied": "Emptied %d mB of %s into the cooler!",
+  "item.gatorade.gatorade_bucket.cooler_empty": "The Gatorade Cooler is empty!",
+  "item.gatorade.gatorade_bucket.cooler_full": "The Gatorade Cooler is full!",
+  "item.gatorade.gatorade_bucket.full": "The Gatorade Bucket is already full!",
+  "item.gatorade.gatorade_bucket.empty": "The Gatorade Bucket is empty!",
+  "item.gatorade.gatorade_bucket.different_fluid": "The Gatorade Bucket contains a different fluid!",
+  "item.gatorade.gatorade_bucket.cannot_fill": "Cannot fill the Gatorade Bucket!",
+  "item.gatorade.gatorade_bucket.picked_up": "Picked up %s!",
+  "item.gatorade.gatorade_bucket.placed": "Placed %s!",
 
   "fluid_type.gatorade.fruit_punch_gatorade": "Fruit Punch Gatorade",
   "fluid_type.gatorade.lemon_lime_gatorade": "Lemon Lime Gatorade",
