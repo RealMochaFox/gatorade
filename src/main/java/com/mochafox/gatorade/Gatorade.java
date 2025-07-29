@@ -34,6 +34,7 @@ import com.mochafox.gatorade.item.ModItems;
 public class Gatorade {
     public static final String MODID = "gatorade";
     public static final int DEFAULT_FLUID_COLOR = 0xffff8000; // Orange
+    public static final int BUCKET_AMOUNT = 1000; // Amount of fluid in a bucket (in mB)
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public Gatorade(IEventBus modEventBus, ModContainer modContainer) {

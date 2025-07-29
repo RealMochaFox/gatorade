@@ -3,6 +3,8 @@ package com.mochafox.gatorade.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
@@ -27,8 +29,8 @@ public class GatoradeCoolerBlockEntity extends BlockEntity {
         return new GatoradeCoolerFluidHandler();
     }
 
-    private boolean isGatoradeFluid(net.minecraft.world.level.material.Fluid fluid) {
-        if (Config.CHAOS_MODE.get()) {
+    private boolean isGatoradeFluid(Fluid fluid) {
+        if (Config.CHAOS_MODE.get() && fluid != Fluids.EMPTY) {
             return true;
         }
         
