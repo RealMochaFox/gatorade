@@ -1,13 +1,13 @@
 package com.mochafox.gatorade.block.custom;
 
 import com.mochafox.gatorade.block.entity.GatoradeCoolerBlockEntity;
-import com.mochafox.gatorade.item.ModItems;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.RenderShape;
@@ -71,7 +71,7 @@ public class GatoradeCoolerBlock extends BaseEntityBlock {
                         itemFluidHandler.drain(filled, IFluidHandler.FluidAction.EXECUTE);
 
                         // Replace the player's held item with an empty Gatorade bucket
-                        player.setItemInHand(hand, new ItemStack(ModItems.GATORADE_BUCKET.get()));
+                        player.setItemInHand(hand, new ItemStack(Items.BUCKET));
 
                         return InteractionResult.SUCCESS;
                     }

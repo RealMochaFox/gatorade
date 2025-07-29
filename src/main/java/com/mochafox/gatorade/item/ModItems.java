@@ -1,13 +1,11 @@
 package com.mochafox.gatorade.item;
 
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import com.mochafox.gatorade.Gatorade;
-import com.mochafox.gatorade.item.custom.GatoradeBucketItem;
 import com.mochafox.gatorade.item.custom.InfiniteElectrolyteDrinkItem;
 import com.mochafox.gatorade.item.custom.SqueezeBottleItem;
 
@@ -24,10 +22,6 @@ public class ModItems {
     // Infinite electrolyte drink item
     public static final DeferredItem<Item> INFINITE_ELECTROLYTE_DRINK = ITEMS.registerItem("infinite_electrolyte_drink",
         InfiniteElectrolyteDrinkItem::create);
-
-    // Gatorade bucket item
-    public static final DeferredItem<GatoradeBucketItem> GATORADE_BUCKET = ITEMS.registerItem("gatorade_bucket", properties -> 
-        new GatoradeBucketItem(Fluids.EMPTY, properties));
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

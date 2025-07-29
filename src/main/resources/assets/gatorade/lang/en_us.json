@@ -16,25 +16,12 @@
 
   "block.gatorade.gatorade_cooler_block": "Gatorade Cooler",
 
-  "item.gatorade.squeeze_bottle": "Squeeze Bottle",
-  
-  "item.gatorade.gatorade_bucket": "Gatorade Bucket",
+  "item.gatorade.gatorade_bucket.name": "%s Bucket",
 
   "item.gatorade.infinite_electrolyte_drink": "Infinite Electrolyte Drink",
-  "item.gatorade.fruit_punch_gatorade_bucket": "Fruit Punch Bucket",
-  "item.gatorade.lemon_lime_gatorade_bucket": "Lemon Lime Bucket",
-  "item.gatorade.orange_gatorade_bucket": "Orange Bucket",
-  "item.gatorade.cool_blue_gatorade_bucket": "Cool Blue Bucket",
-  "item.gatorade.lime_cucumber_gatorade_bucket": "Lime Cucumber Bucket",
-  "item.gatorade.lightning_blast_gatorade_bucket": "Lightning Blast Bucket",
-  "item.gatorade.midnight_ice_gatorade_bucket": "Midnight Ice Bucket",
-  "item.gatorade.glacier_freeze_gatorade_bucket": "Glacier Freeze Bucket",
-  "item.gatorade.glacier_cherry_gatorade_bucket": "Glacier Cherry Bucket",
-  "item.gatorade.arctic_blitz_gatorade_bucket": "Arctic Blitz Bucket",
-  "item.gatorade.grape_gatorade_bucket": "Grape Bucket",
-  "item.gatorade.strawberry_gatorade_bucket": "Strawberry Bucket",
-  "item.gatorade.blue_cherry_gatorade_bucket": "Blue Cherry Bucket",
-  "item.gatorade.green_apple_gatorade_bucket": "Green Apple Bucket",
+  "item.gatorade.infinite_electrolyte_drink.drank.electrolytes": "Refilled electrolytes!",
+
+  "item.gatorade.squeeze_bottle": "Squeeze Bottle",
   "item.gatorade.squeeze_bottle.empty": "The Squeeze Bottle is empty!",
   "item.gatorade.squeeze_bottle.filled": "Filled Squeeze Bottle with %d mB of %s!",
   "item.gatorade.squeeze_bottle.emptied": "Emptied %d mB of %s into the cooler!",
@@ -44,18 +31,6 @@
   "item.gatorade.squeeze_bottle.different_fluid": "The Squeeze Bottle contains a different fluid!",
   "item.gatorade.squeeze_bottle.cannot_fill": "Cannot fill the Squeeze Bottle!",
   "item.gatorade.squeeze_bottle.drank.electrolytes": "+%d electrolytes",
-  "item.gatorade.infinite_electrolyte_drink.drank.electrolytes": "Refilled electrolytes!",
-
-  "item.gatorade.gatorade_bucket.filled": "Filled Gatorade Bucket with %d mB of %s!",
-  "item.gatorade.gatorade_bucket.emptied": "Emptied %d mB of %s into the cooler!",
-  "item.gatorade.gatorade_bucket.cooler_empty": "The Gatorade Cooler is empty!",
-  "item.gatorade.gatorade_bucket.cooler_full": "The Gatorade Cooler is full!",
-  "item.gatorade.gatorade_bucket.full": "The Gatorade Bucket is already full!",
-  "item.gatorade.gatorade_bucket.empty": "The Gatorade Bucket is empty!",
-  "item.gatorade.gatorade_bucket.different_fluid": "The Gatorade Bucket contains a different fluid!",
-  "item.gatorade.gatorade_bucket.cannot_fill": "Cannot fill the Gatorade Bucket!",
-  "item.gatorade.gatorade_bucket.picked_up": "Picked up %s!",
-  "item.gatorade.gatorade_bucket.placed": "Placed %s!",
 
   "fluid_type.gatorade.fruit_punch_gatorade": "Fruit Punch Gatorade",
   "fluid_type.gatorade.lemon_lime_gatorade": "Lemon Lime Gatorade",
@@ -74,7 +49,7 @@
 
   "gatorade.configuration.title": "Gatorade Configs",
   "gatorade.configuration.section.gatorade.common.toml.title": "Gatorade",
-  
+
   "gatorade.configuration.chaosMode": "Chaos Mode",
   "gatorade.configuration.chaosMode.tooltip": "Allow filling of Gatorade containers with any liquid, not just Gatorade fluids.\n\nYes, you can drink crude oil.",
   

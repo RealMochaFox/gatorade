@@ -22,6 +22,6 @@ public class GatoradeBucketItem extends BucketItem {
             return Component.translatable("item.gatorade.gatorade_bucket.name", fluid.getFluidType().getDescription());
         }
 
-        return Component.translatable("item.gatorade.gatorade_bucket.name_empty");
+        return super.getName(stack);
     }
 }

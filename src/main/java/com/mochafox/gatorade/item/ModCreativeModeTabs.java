@@ -43,9 +43,6 @@ public class ModCreativeModeTabs {
                 // Pre-filled squeeze bottle
                 output.accept(createFilledSqueezeBottle(OrangeGatoradeFluid.SOURCE.get()));
 
-                // Gatorade bucket
-                output.accept(ModItems.GATORADE_BUCKET.get());
-
                 // Fluid buckets for spawning
                 ModFluids.FLUIDS.getEntries().forEach(entry -> {
                     if (entry.get() instanceof GatoradeFluid.SourceGatoradeFluid) {
