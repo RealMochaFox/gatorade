@@ -17,11 +17,11 @@ import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 
-public record GatoradeFluidItemTintSource(int defaultColor) implements ItemTintSource {
-    public static final MapCodec<GatoradeFluidItemTintSource> MAP_CODEC = ExtraCodecs.RGB_COLOR_CODEC.fieldOf("default")
-        .xmap(color -> new GatoradeFluidItemTintSource(ARGB.opaque(color)), source -> source.defaultColor);
+public record GatoradeFluidHandlerItemTintSource(int defaultColor) implements ItemTintSource {
+    public static final MapCodec<GatoradeFluidHandlerItemTintSource> MAP_CODEC = ExtraCodecs.RGB_COLOR_CODEC.fieldOf("default")
+        .xmap(color -> new GatoradeFluidHandlerItemTintSource(ARGB.opaque(color)), source -> source.defaultColor);
 
-    public GatoradeFluidItemTintSource() {
+    public GatoradeFluidHandlerItemTintSource() {
         this(ARGB.opaque(Gatorade.DEFAULT_FLUID_COLOR));
     }
 
@@ -44,7 +44,7 @@ public record GatoradeFluidItemTintSource(int defaultColor) implements ItemTintS
     }
 
     @Override
-    public MapCodec<GatoradeFluidItemTintSource> type() {
+    public MapCodec<GatoradeFluidHandlerItemTintSource> type() {
         return MAP_CODEC;
     }
 }

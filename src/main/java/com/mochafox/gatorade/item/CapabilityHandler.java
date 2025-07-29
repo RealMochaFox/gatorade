@@ -5,7 +5,6 @@ import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 
 import com.mochafox.gatorade.block.ModBlocks;
 import com.mochafox.gatorade.block.entity.GatoradeCoolerBlockEntity;
-import com.mochafox.gatorade.item.capability.GatoradeBucketFluidHandler;
 import com.mochafox.gatorade.item.capability.SqueezeBottleFluidHandler;
 
 /**
@@ -19,13 +18,6 @@ public class CapabilityHandler {
             Capabilities.FluidHandler.ITEM,
             (itemStack, context) -> new SqueezeBottleFluidHandler(itemStack),
             ModItems.SQUEEZE_BOTTLE.get()
-        );
-
-        // Register fluid handler capability for gatorade bucket
-        event.registerItem(
-            Capabilities.FluidHandler.ITEM,
-            (itemStack, context) -> new GatoradeBucketFluidHandler(itemStack),
-            ModItems.GATORADE_BUCKET.get()
         );
 
         // Register fluid handler capability for gatorade cooler block

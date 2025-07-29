@@ -9,7 +9,6 @@ import com.mochafox.gatorade.item.ModItems;
 import com.mochafox.gatorade.item.custom.GatoradeBucketItem;
 
 import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;

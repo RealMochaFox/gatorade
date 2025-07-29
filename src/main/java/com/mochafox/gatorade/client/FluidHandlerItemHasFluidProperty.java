@@ -1,4 +1,4 @@
-package com.mochafox.gatorade.client.property;
+package com.mochafox.gatorade.client;
 
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.item.properties.conditional.ConditionalItemModelProperty;
@@ -13,12 +13,8 @@ import com.mojang.serialization.MapCodec;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-/**
- * Conditional item model property that checks if an item contains fluid.
- * Used to switch between empty and filled item models.
- */
-public record HasFluidProperty() implements ConditionalItemModelProperty {
-    public static final MapCodec<HasFluidProperty> MAP_CODEC = MapCodec.unit(new HasFluidProperty());
+public record FluidHandlerItemHasFluidProperty() implements ConditionalItemModelProperty {
+    public static final MapCodec<FluidHandlerItemHasFluidProperty> MAP_CODEC = MapCodec.unit(new FluidHandlerItemHasFluidProperty());
 
     @Override
     public boolean get(@Nonnull ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity, int seed, @Nonnull ItemDisplayContext context) {
@@ -30,7 +26,7 @@ public record HasFluidProperty() implements ConditionalItemModelProperty {
     }
 
     @Override
-    public MapCodec<HasFluidProperty> type() {
+    public MapCodec<FluidHandlerItemHasFluidProperty> type() {
         return MAP_CODEC;
     }
 }
