@@ -6,6 +6,7 @@ import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.block.ModBlocks;
 import com.mochafox.gatorade.fluid.ModFluids;
 import com.mochafox.gatorade.item.ModItems;
+import com.mochafox.gatorade.item.custom.GatoradeBucketItem;
 
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
@@ -92,7 +93,7 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
                     .noLootTable()));
             
             this.bucket = ModItems.ITEMS.registerItem(name + "_bucket",
-                properties -> new BucketItem(source.get(), properties.craftRemainder(ModItems.GATORADE_BUCKET.get()).stacksTo(1)));
+                properties -> new GatoradeBucketItem(source.get(), properties.stacksTo(1)));
         }
 
         private BaseFlowingFluid.Properties createLazyProperties() {

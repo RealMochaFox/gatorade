@@ -42,7 +42,7 @@ public class GatoradeBucketItem extends BucketItem {
     private static final int CAPACITY = 1000; // mB capacity (standard bucket size)
 
     public GatoradeBucketItem(Fluid fluid, Properties properties) {
-        super(fluid, properties.stacksTo(16));
+        super(fluid, properties);
     }
 
     @Override
