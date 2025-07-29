@@ -36,23 +36,6 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
     public abstract int getTintColor();
 
     /**
-     * Creates the common fluid properties for a flavored Gatorade fluid.
-     *
-     * @param type the {@link FluidType} for the fluid
-     * @param source supplier for the source variant
-     * @param flowing supplier for the flowing variant
-     * @param bucket supplier for the bucket item
-     * @return configured fluid properties
-     */
-    protected static Properties createFluidProperties(
-            DeferredHolder<FluidType, FluidType> type,
-            Supplier<? extends BaseFlowingFluid> source,
-            Supplier<? extends BaseFlowingFluid> flowing,
-            Supplier<? extends Item> bucket) {
-        return new Properties(type, source, flowing).bucket(bucket);
-    }
-
-    /**
      * Creates a FluidType with the specified physical properties.
      * 
      * @param density the fluid density (kg/m³)
