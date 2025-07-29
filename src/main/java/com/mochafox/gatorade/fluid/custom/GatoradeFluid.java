@@ -2,6 +2,8 @@ package com.mochafox.gatorade.fluid.custom;
 
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.block.ModBlocks;
 import com.mochafox.gatorade.fluid.ModFluids;
@@ -117,18 +119,18 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
         }
 
         @Override
-        protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
+        protected void createFluidStateDefinition(@Nonnull StateDefinition.Builder<Fluid, FluidState> builder) {
             super.createFluidStateDefinition(builder);
             builder.add(LEVEL);
         }
 
         @Override
-        public boolean isSource(FluidState state) {
+        public boolean isSource(@Nonnull FluidState state) {
             return false;
         }
 
         @Override
-        public int getAmount(FluidState state) {
+        public int getAmount(@Nonnull FluidState state) {
             return state.getValue(LEVEL);
         }
 
@@ -145,12 +147,12 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
         }
 
         @Override
-        public boolean isSource(FluidState state) {
+        public boolean isSource(@Nonnull FluidState state) {
             return true;
         }
 
         @Override
-        public int getAmount(FluidState state) {
+        public int getAmount(@Nonnull FluidState state) {
             return 8;
         }
 
