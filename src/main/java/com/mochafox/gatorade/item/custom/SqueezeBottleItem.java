@@ -69,12 +69,49 @@ public class SqueezeBottleItem extends Item {
             return InteractionResult.SUCCESS;
         } else {
             if (!level.isClientSide) {
-                player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.empty"), true);
+                player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.bottle.empty"), true);
             }
             return InteractionResult.FAIL;
         }
     }
-    
+
+    @Override
+    public ItemStack finishUsingItem(@Nonnull ItemStack itemStack, @Nonnull Level level, @Nonnull LivingEntity livingEntity) {
+        if (!level.isClientSide && livingEntity instanceof Player player) {
+            IFluidHandlerItem fluidHandler = itemStack.getCapability(Capabilities.FluidHandler.ITEM);
+            if (fluidHandler != null && hasFluid(itemStack)) {
+                boolean electrolytesEnabled = Config.ENABLE_ELECTROLYTES.get();
+                
+                // Get fluid from bottle, subtract drink amount
+                FluidStack currentFluid = fluidHandler.getFluidInTank(0);
+                int drinkAmount = Math.min(currentFluid.getAmount(), DRINK_AMOUNT);
+                
+                // Drain the fluid from the bottle
+                FluidStack drained = fluidHandler.drain(drinkAmount, IFluidHandler.FluidAction.EXECUTE);
+                
+                // Restore electrolytes if enabled
+                if (electrolytesEnabled) {
+                    ElectrolytesUtil.addElectrolytes(player, drained.getAmount());
+                }
+                
+                // Show feedback to player
+                if (electrolytesEnabled) {
+                    player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.drank", drained.getAmount()), true);
+                }
+
+                // Track advancement progress
+                if (player instanceof ServerPlayer serverPlayer) {
+                    AdvancementUtil.recordGatoradeConsumption(serverPlayer, drained.getFluid());
+                }
+
+                // Return the updated container
+                return fluidHandler.getContainer();
+            }
+        }
+        
+        return itemStack;
+    }
+
     @Override
     public InteractionResult useOn(@Nonnull UseOnContext context) {
         Level level = context.getLevel();
@@ -112,41 +149,35 @@ public class SqueezeBottleItem extends Item {
     }
 
     private InteractionResult fillSqueezeBottle(FluidStack itemFluid, IFluidHandlerItem itemFluidHandler, FluidStack blockFluid, IFluidHandler blockFluidHandler, Player player, InteractionHand hand) {
-        if (!blockFluid.isEmpty()) {
-            FluidStack toTransfer = blockFluidHandler.drain(1000, IFluidHandler.FluidAction.SIMULATE);
-            if (!toTransfer.isEmpty()) {
-                int filled = itemFluidHandler.fill(toTransfer, IFluidHandler.FluidAction.SIMULATE);
-                if (filled > 0) {
-                    // Execute the transfer
-                    FluidStack drained = blockFluidHandler.drain(filled, IFluidHandler.FluidAction.EXECUTE);
-                    itemFluidHandler.fill(drained, IFluidHandler.FluidAction.EXECUTE);
-                    
-                    // Update the player's held item with the new container from the fluid handler
-                    player.setItemInHand(hand, itemFluidHandler.getContainer());
-                    
-                    // Provide feedback to the player
-                    String fluidName = drained.getFluid().getFluidType().getDescription().getString();
-                    player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.filled", filled, fluidName), true);
-                    
-                    return InteractionResult.SUCCESS;
-                }
-            }
-        }
-        
-        // If we can't fill the squeeze bottle, provide appropriate feedback
-        if (blockFluid.isEmpty()) {
-            player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.cooler_empty"), true);
-        } else if (!itemFluid.isEmpty()) {
-            // Check if squeeze bottle is full or has different fluid
-            if (itemFluid.getAmount() >= 1000) {
-                player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.full"), true);
-            } else if (!FluidStack.isSameFluidSameComponents(blockFluid, itemFluid)) {
-                player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.different_fluid"), true);
-            }
+        FluidStack toTransfer = blockFluidHandler.drain(CAPACITY, IFluidHandler.FluidAction.SIMULATE);
+        int filled = itemFluidHandler.fill(toTransfer, IFluidHandler.FluidAction.SIMULATE);
+        if (filled > 0) {
+            // Execute the transfer
+            FluidStack drained = blockFluidHandler.drain(filled, IFluidHandler.FluidAction.EXECUTE);
+            itemFluidHandler.fill(drained, IFluidHandler.FluidAction.EXECUTE);
+            
+            // Update the player's held item with the new container from the fluid handler
+            player.setItemInHand(hand, itemFluidHandler.getContainer());
+            
+            // Provide feedback to the player
+            String fluidName = drained.getFluid().getFluidType().getDescription().getString();
+            player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.bottle.filled", filled, fluidName), true);
+
+            return InteractionResult.SUCCESS;
+        } else if (itemFluid.getAmount() >= CAPACITY) {
+            // Bottle is already full
+            player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.bottle.full"), true);
+        } else if (itemFluid.getAmount() < CAPACITY && blockFluid.isEmpty()) {
+            // Cooler is empty and bottle is not full
+            player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.cooler.empty"), true);
+        } else if (!FluidStack.isSameFluid(itemFluid, blockFluid)) {
+            // Bottle contains a different fluid than the cooler
+            player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.bottle.different_fluid"), true);
         } else {
-            player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.cannot_fill"), true);
+            // Cannot fill the bottle for some reason
+            player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.bottle.cannot_fill"), true);
         }
-        
+
         return InteractionResult.FAIL;   
     }
 
@@ -181,43 +212,6 @@ public class SqueezeBottleItem extends Item {
         }
     }
     
-    @Override
-    public ItemStack finishUsingItem(@Nonnull ItemStack itemStack, @Nonnull Level level, @Nonnull LivingEntity livingEntity) {
-        if (!level.isClientSide && livingEntity instanceof Player player) {
-            IFluidHandlerItem fluidHandler = itemStack.getCapability(Capabilities.FluidHandler.ITEM);
-            if (fluidHandler != null && hasFluid(itemStack)) {
-                boolean electrolytesEnabled = Config.ENABLE_ELECTROLYTES.get();
-                
-                // Get fluid from bottle, subtract drink amount
-                FluidStack currentFluid = fluidHandler.getFluidInTank(0);
-                int drinkAmount = Math.min(currentFluid.getAmount(), DRINK_AMOUNT);
-                
-                // Drain the fluid from the bottle
-                FluidStack drained = fluidHandler.drain(drinkAmount, IFluidHandler.FluidAction.EXECUTE);
-                
-                // Restore electrolytes if enabled
-                if (electrolytesEnabled) {
-                    ElectrolytesUtil.addElectrolytes(player, drained.getAmount());
-                }
-                
-                // Show feedback to player
-                if (electrolytesEnabled) {
-                    player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.drank.electrolytes", drained.getAmount()), true);
-                }
-
-                // Track advancement progress
-                if (player instanceof ServerPlayer serverPlayer) {
-                    AdvancementUtil.recordGatoradeConsumption(serverPlayer, drained.getFluid());
-                }
-
-                // Return the updated container
-                return fluidHandler.getContainer();
-            }
-        }
-        
-        return itemStack;
-    }
-
     // === Fluid Management === //
     private boolean hasFluid(ItemStack itemStack) {
         IFluidHandlerItem fluidHandler = itemStack.getCapability(Capabilities.FluidHandler.ITEM);
@@ -242,7 +236,7 @@ public class SqueezeBottleItem extends Item {
         }
         return fluidHandler.getFluidInTank(0).getFluid();
     }
-    
+
     // === Fluid Bar === //
     @Override
     public boolean isBarVisible(@Nonnull ItemStack itemStack) {
