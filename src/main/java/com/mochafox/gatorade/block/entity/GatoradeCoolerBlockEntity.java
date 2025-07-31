@@ -5,6 +5,8 @@ import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
@@ -27,6 +29,24 @@ public class GatoradeCoolerBlockEntity extends BlockEntity {
 
     public IFluidHandler getFluidHandler() {
         return new GatoradeCoolerFluidHandler();
+    }
+
+    @Override
+    protected void saveAdditional(@Nonnull ValueOutput output) {
+        super.saveAdditional(output);
+        
+        // Save the stored fluid using FluidStack's built-in codec
+        if (!storedFluid.isEmpty()) {
+            output.store("storedFluid", FluidStack.OPTIONAL_CODEC, storedFluid);
+        }
+    }
+
+    @Override
+    protected void loadAdditional(@Nonnull ValueInput input) {
+        super.loadAdditional(input);
+        
+        // Load the stored fluid using FluidStack's built-in codec
+        storedFluid = input.read("storedFluid", FluidStack.OPTIONAL_CODEC).orElse(FluidStack.EMPTY);
     }
 
     private boolean isGatoradeFluid(Fluid fluid) {
