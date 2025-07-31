@@ -21,7 +21,7 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Gatorade.MODID);
 
     public static final DeferredBlock<Block> GATORADE_COOLER_BLOCK = registerBlock("gatorade_cooler_block",
-            properties -> new GatoradeCoolerBlock(properties.strength(2f).noLootTable().sound(SoundType.STONE)));
+            properties -> new GatoradeCoolerBlock(properties.strength(2f).sound(SoundType.STONE)));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> function) {
         DeferredBlock<T> toReturn = BLOCKS.registerBlock(name, function);
