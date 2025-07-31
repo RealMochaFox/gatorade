@@ -10,22 +10,22 @@
       }
     },
     "title": {
-      "translate": "advancement.gatorade.drink_100_gatorade_bottles.title"
+      "translate": "advancement.gatorade.drink_1000_gatorade_bottles.title"
     },
     "description": {
-      "translate": "advancement.gatorade.drink_100_gatorade_bottles.desc"
+      "translate": "advancement.gatorade.drink_1000_gatorade_bottles.desc"
     },
     "frame": "challenge",
     "show_toast": true,
     "announce_to_chat": true,
     "hidden": true
   },
-  "parent": "gatorade:gatorade/drink_75_gatorade_bottles",
+  "parent": "gatorade:gatorade/drink_500_gatorade_bottles",
   "criteria": {
-    "drink_100_gatorade": {
+    "drink_1000_gatorade": {
       "trigger": "gatorade:drink_gatorade",
       "conditions": {
-        "min_count": 100
+        "min_count": 1000
       }
     }
   }
