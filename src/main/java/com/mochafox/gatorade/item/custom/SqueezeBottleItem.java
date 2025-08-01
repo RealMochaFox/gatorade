@@ -18,8 +18,16 @@ import net.minecraft.world.item.component.Consumable;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
+import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.phys.BlockHitResult;
+import net.minecraft.world.phys.HitResult;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
@@ -64,6 +72,18 @@ public class SqueezeBottleItem extends Item {
     public InteractionResult use(@Nonnull Level level, @Nonnull Player player, @Nonnull InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
         
+        // Fluid block interaction logic
+        if (!level.isClientSide && !hasFluid(itemStack)) {
+
+            // Perform a raytrace to see if we're looking at a fluid (similar to empty bucket)
+            BlockHitResult hitResult = getPlayerPOVHitResult(level, player, ClipContext.Fluid.SOURCE_ONLY);
+            if (hitResult.getType() == HitResult.Type.BLOCK) {
+                BlockPos pos = hitResult.getBlockPos();
+                return tryFillFromFluidBlock(level, pos, itemStack, player, hand);
+            }
+        }
+        
+        // Drinking logic
         if (hasFluid(itemStack)) {
             player.startUsingItem(hand);
             return InteractionResult.SUCCESS;
@@ -83,8 +103,8 @@ public class SqueezeBottleItem extends Item {
                 boolean electrolytesEnabled = Config.ENABLE_ELECTROLYTES.get();
                 
                 // Get fluid from bottle, subtract drink amount
-                FluidStack currentFluid = fluidHandler.getFluidInTank(0);
-                int drinkAmount = Math.min(currentFluid.getAmount(), DRINK_AMOUNT);
+                int currentAmount = getFluidAmount(itemStack);
+                int drinkAmount = Math.min(currentAmount, DRINK_AMOUNT);
                 
                 // Drain the fluid from the bottle
                 FluidStack drained = fluidHandler.drain(drinkAmount, IFluidHandler.FluidAction.EXECUTE);
@@ -133,7 +153,11 @@ public class SqueezeBottleItem extends Item {
             
             if (itemFluidHandler != null) {
                 FluidStack blockFluid = blockFluidHandler.getFluidInTank(0);
-                FluidStack itemFluid = itemFluidHandler.getFluidInTank(0);
+                FluidStack itemFluid = FluidStack.EMPTY;
+
+                if (hasFluid(itemStack)) {
+                    itemFluid = new FluidStack(getFluid(itemStack), getFluidAmount(itemStack));
+                }
 
                 if (player.isCrouching() && Config.EMPTYABLE_SQUEEZE_BOTTLE.get()) {
                     return fillBucket(itemFluid, itemFluidHandler, blockFluid, blockFluidHandler, player, hand);
@@ -144,8 +168,95 @@ public class SqueezeBottleItem extends Item {
             
             return InteractionResult.SUCCESS;
         }
+
+        return InteractionResult.PASS;
+    }
+
+    private InteractionResult tryFillFromFluidBlock(Level level, BlockPos pos, ItemStack itemStack, Player player, InteractionHand hand) {
+        FluidState fluidState = level.getFluidState(pos);
+        BlockState blockState = level.getBlockState(pos);
+        
+        Fluid fluid = null;
+        boolean isSource = false;
+        BlockPos fluidPos = null;
+        
+        // Try and get fluid from the fluid state or liquid block
+        if (!fluidState.isEmpty() && fluidState.isSource()) {
+            fluid = fluidState.getType();
+            isSource = true;
+            fluidPos = pos;
+        } else if (blockState.getBlock() instanceof LiquidBlock) {
+            FluidState blockFluidState = blockState.getFluidState();
+            if (!blockFluidState.isEmpty() && blockFluidState.isSource()) {
+                fluid = blockFluidState.getType();
+                isSource = true;
+                fluidPos = pos;
+            }
+        }
+        
+        // Return out if no valid fluid found
+        if (fluid == null || !isSource || fluidPos == null || !isGatoradeFluid(fluid)) {
+            return InteractionResult.PASS;
+        }
+        
+        IFluidHandlerItem itemFluidHandler = itemStack.getCapability(Capabilities.FluidHandler.ITEM);
+        if (itemFluidHandler == null) {
+            return InteractionResult.FAIL;
+        }
+        
+        int currentAmount = getFluidAmount(itemStack);
+        Fluid currentFluid = getFluid(itemStack);
+        
+        // Bottle is full
+        if (currentAmount >= CAPACITY) {
+            player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.bottle.full"), true);
+            return InteractionResult.FAIL;
+        }
+        
+        // Bottle already has different fluid
+        if (currentAmount > 0 && currentFluid != fluid) {
+            player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.bottle.different_fluid"), true);
+            return InteractionResult.FAIL;
+        }
+        
+        // Calculate how much we can fill
+        int spaceAvailable = CAPACITY - currentAmount;
+        int amountToFill = Math.min(spaceAvailable, 1000); // Fill up to 1 bucket worth
+        
+        FluidStack fluidToAdd = new FluidStack(fluid, amountToFill);
+        int actuallyFilled = itemFluidHandler.fill(fluidToAdd, IFluidHandler.FluidAction.SIMULATE);
+        
+        if (actuallyFilled > 0) {
+            // Remove the fluid block from the world
+            level.setBlock(fluidPos, Blocks.AIR.defaultBlockState(), 11);
+            level.gameEvent(player, GameEvent.FLUID_PICKUP, fluidPos);
+            
+            // Fill
+            itemFluidHandler.fill(fluidToAdd, IFluidHandler.FluidAction.EXECUTE);
+
+            // Provide feedback to the player
+            String fluidName = fluid.getFluidType().getDescription().getString();
+            player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.bottle.filled", actuallyFilled, fluidName), true);
+            
+            // Play pickup sound
+            level.playSound(null, player.getX(), player.getY(), player.getZ(), 
+                            SoundEvents.BUCKET_FILL, net.minecraft.sounds.SoundSource.PLAYERS, 1.0F, 1.0F);
+            
+            return InteractionResult.SUCCESS;
+        }
         
         return InteractionResult.PASS;
+    }
+    
+    /**
+     * Checks if a fluid is a Gatorade fluid that can be used with the squeeze bottle
+     */
+    private boolean isGatoradeFluid(Fluid fluid) {
+        if (Config.CHAOS_MODE.get()) {
+            return true;
+        }
+        
+        return fluid instanceof GatoradeFluid;
     }
 
     private InteractionResult fillSqueezeBottle(FluidStack itemFluid, IFluidHandlerItem itemFluidHandler, FluidStack blockFluid, IFluidHandler blockFluidHandler, Player player, InteractionHand hand) {

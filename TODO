@@ -79,10 +79,6 @@
 - Implement naturally occuring gatorade [springs](https://docs.neoforged.net/docs/worldgen/biomemodifier/#available-values-for-decoration-steps) that spawn
 - Gatorade springs should support spawning all kinds of gatorade fluids
 
-### Blocks & Items
-#### Squeeze Bottle
-- Right clicking Squeeze Bottle aimed at Gatorade Fluid should fill the Squeeze Bottle with that fluid [?]
-
 ### Misc
 - Add a couple florbalistican songs to the mod
 - add messages to the cooler interactions
@@ -93,6 +89,7 @@
 - Right clicking Squeeze Bottle aimed at a filled Gatorade Cooler Block should try to fill the Squeeze Bottle with that fluid
 - Right clicking Squeeze Bottle aimed at empty Gatorade Cooler Block should empty the Squeeze Bottle
 - Empty Squeeze Bottle should have a different texture than the filled Squeeze Bottle
+- Right clicking Squeeze Bottle aimed at Gatorade Fluid should fill the Squeeze Bottle with that fluid
 
 #### Gatorade Cooler Block
 - Right clicking Gatorade Cooler Block with an empty gatorade fluid bucket will fill the bucket from the Gatorade Cooler Block
