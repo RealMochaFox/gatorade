@@ -2,7 +2,6 @@ package com.mochafox.gatorade.block.custom;
 
 import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.block.entity.GatoradeCoolerBlockEntity;
-import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -156,6 +155,7 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
 
         // Require chaos mode to extract non-Gatorade fluids
         Fluid fluid = currentFluid.getFluid();
+        if (!Gatorade.isGatoradeFluid(fluid)) {
             player.displayClientMessage(Component.translatable("block.gatorade.gatorade_cooler_block.contains_invalid_fluid", fluid.toString()), true);
             return InteractionResult.FAIL;
         }
