@@ -1,7 +1,6 @@
 package com.mochafox.gatorade.client;
 
 import com.mochafox.gatorade.Gatorade;
-import com.mochafox.gatorade.client.property.HasFluidProperty;
 import com.mochafox.gatorade.fluid.ModFluids;
 import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 
@@ -28,15 +27,19 @@ public class ClientEventHandler {
 
     public static void registerItemTintSources(RegisterColorHandlersEvent.ItemTintSources event) {
         event.register(
-            ResourceLocation.fromNamespaceAndPath(Gatorade.MODID, "gatorade_fluid_item_tint_source"),
-            GatoradeFluidItemTintSource.MAP_CODEC
+            ResourceLocation.fromNamespaceAndPath(Gatorade.MODID, "gatorade_fluidhandler_item_tint_source"),
+            GatoradeFluidHandlerItemTintSource.MAP_CODEC
+        );
+        event.register(
+            ResourceLocation.fromNamespaceAndPath(Gatorade.MODID, "gatorade_bucket_item_tint_source"),
+            GatoradeBucketItemTintSource.MAP_CODEC
         );
     }
 
     public static void registerConditionalItemProperties(RegisterConditionalItemModelPropertyEvent event) {
         event.register(
-            ResourceLocation.fromNamespaceAndPath(Gatorade.MODID, "has_fluid"),
-            HasFluidProperty.MAP_CODEC
+            ResourceLocation.fromNamespaceAndPath(Gatorade.MODID, "fluidhandler_item_has_fluid"),
+            FluidHandlerItemHasFluidProperty.MAP_CODEC
         );
     }
 

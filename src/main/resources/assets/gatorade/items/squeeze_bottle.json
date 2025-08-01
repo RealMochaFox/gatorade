@@ -1,7 +1,7 @@
 {
   "model": {
     "type": "minecraft:condition",
-    "property": "gatorade:has_fluid",
+    "property": "gatorade:fluidhandler_item_has_fluid",
     "on_true": {
       "type": "minecraft:model",
       "model": "gatorade:item/squeeze_bottle",
@@ -11,7 +11,7 @@
           "value": 16777215
         },
         {
-          "type": "gatorade:gatorade_fluid_item_tint_source",
+          "type": "gatorade:gatorade_fluidhandler_item_tint_source",
           "default": 16777215
         }
       ]

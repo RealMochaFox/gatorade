@@ -3,12 +3,13 @@ package com.mochafox.gatorade.block.entity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.capability.IFluidHandler;
 
 import com.mochafox.gatorade.block.ModBlockEntities;
-import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
-import com.mochafox.gatorade.Config;
+import com.mochafox.gatorade.Gatorade;
 
 import javax.annotation.Nonnull;
 
@@ -27,12 +28,22 @@ public class GatoradeCoolerBlockEntity extends BlockEntity {
         return new GatoradeCoolerFluidHandler();
     }
 
-    private boolean isGatoradeFluid(net.minecraft.world.level.material.Fluid fluid) {
-        if (Config.CHAOS_MODE.get()) {
-            return true;
-        }
+    @Override
+    protected void saveAdditional(@Nonnull ValueOutput output) {
+        super.saveAdditional(output);
         
-        return fluid instanceof GatoradeFluid;
+        // Save the stored fluid using FluidStack's built-in codec
+        if (!storedFluid.isEmpty()) {
+            output.store("storedFluid", FluidStack.OPTIONAL_CODEC, storedFluid);
+        }
+    }
+
+    @Override
+    protected void loadAdditional(@Nonnull ValueInput input) {
+        super.loadAdditional(input);
+        
+        // Load the stored fluid using FluidStack's built-in codec
+        storedFluid = input.read("storedFluid", FluidStack.OPTIONAL_CODEC).orElse(FluidStack.EMPTY);
     }
 
     private class GatoradeCoolerFluidHandler implements IFluidHandler {
@@ -57,12 +68,12 @@ public class GatoradeCoolerBlockEntity extends BlockEntity {
         @Override
         public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
             if (tank != 0) return false;
-            return isGatoradeFluid(stack.getFluid());
+            return Gatorade.isGatoradeFluid(stack.getFluid());
         }
 
         @Override
         public int fill(@Nonnull FluidStack resource, @Nonnull FluidAction action) {
-            if (resource.isEmpty() || !isGatoradeFluid(resource.getFluid())) {
+            if (resource.isEmpty() || !Gatorade.isGatoradeFluid(resource.getFluid())) {
                 return 0;
             }
 
@@ -107,7 +118,7 @@ public class GatoradeCoolerBlockEntity extends BlockEntity {
                 return FluidStack.EMPTY;
             }
 
-            if (storedFluid.isEmpty() || !isGatoradeFluid(storedFluid.getFluid())) {
+            if (storedFluid.isEmpty() || !Gatorade.isGatoradeFluid(storedFluid.getFluid())) {
                 return FluidStack.EMPTY;
             }
 

@@ -8,8 +8,7 @@
         "value": 16777215
       },
       {
-        "type": "gatorade:gatorade_fluid_item_tint_source",
-        "default": 16777215
+        "type": "gatorade:gatorade_bucket_item_tint_source"
       }
     ]
   }

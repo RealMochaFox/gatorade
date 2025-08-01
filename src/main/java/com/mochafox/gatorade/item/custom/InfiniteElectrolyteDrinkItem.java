@@ -44,8 +44,6 @@ public class InfiniteElectrolyteDrinkItem extends Item {
     
     @Override
     public ItemStack finishUsingItem(@Nonnull ItemStack stack, @Nonnull Level level, @Nonnull LivingEntity livingEntity) {
-        super.finishUsingItem(stack, level, livingEntity);
-        
         if (livingEntity instanceof Player player) {
             if (Config.ENABLE_ELECTROLYTES.get()) {
                 int electrolytesRestored = Config.MAX_ELECTROLYTES.get();
@@ -54,15 +52,12 @@ public class InfiniteElectrolyteDrinkItem extends Item {
                 ElectrolytesUtil.addElectrolytes(player, electrolytesRestored);
 
                 // Show feedback to player
-                player.displayClientMessage(Component.translatable("item.gatorade.infinite_electrolyte_drink.drank.electrolytes"), true);
+                player.displayClientMessage(Component.translatable("item.gatorade.infinite_electrolyte_drink.drank"), true);
             }
         }
         
-        if (stack.isEmpty()) {
-            return ItemStack.EMPTY;
-        } else {
-            return stack;
-        }
+        // Always return the original stack to prevent consumption
+        return stack;
     }
 
     

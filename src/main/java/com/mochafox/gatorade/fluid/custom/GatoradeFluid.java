@@ -2,14 +2,15 @@ package com.mochafox.gatorade.fluid.custom;
 
 import java.util.function.Supplier;
 
+import javax.annotation.Nonnull;
+
 import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.block.ModBlocks;
 import com.mochafox.gatorade.fluid.ModFluids;
 import com.mochafox.gatorade.item.ModItems;
+import com.mochafox.gatorade.item.custom.GatoradeBucketItem;
 
 import net.minecraft.world.item.BucketItem;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
@@ -34,23 +35,6 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
      * Returns the ARGB color used to tint this fluid.
      */
     public abstract int getTintColor();
-
-    /**
-     * Creates the common fluid properties for a flavored Gatorade fluid.
-     *
-     * @param type the {@link FluidType} for the fluid
-     * @param source supplier for the source variant
-     * @param flowing supplier for the flowing variant
-     * @param bucket supplier for the bucket item
-     * @return configured fluid properties
-     */
-    protected static Properties createFluidProperties(
-            DeferredHolder<FluidType, FluidType> type,
-            Supplier<? extends BaseFlowingFluid> source,
-            Supplier<? extends BaseFlowingFluid> flowing,
-            Supplier<? extends Item> bucket) {
-        return new Properties(type, source, flowing).bucket(bucket);
-    }
 
     /**
      * Creates a FluidType with the specified physical properties.
@@ -93,7 +77,7 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
                     .noLootTable()));
             
             this.bucket = ModItems.ITEMS.registerItem(name + "_bucket",
-                properties -> new BucketItem(source.get(), properties.craftRemainder(Items.BUCKET).stacksTo(1)));
+                properties -> new GatoradeBucketItem(source.get(), properties.stacksTo(1)));
         }
 
         private BaseFlowingFluid.Properties createLazyProperties() {
@@ -135,18 +119,18 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
         }
 
         @Override
-        protected void createFluidStateDefinition(StateDefinition.Builder<Fluid, FluidState> builder) {
+        protected void createFluidStateDefinition(@Nonnull StateDefinition.Builder<Fluid, FluidState> builder) {
             super.createFluidStateDefinition(builder);
             builder.add(LEVEL);
         }
 
         @Override
-        public boolean isSource(FluidState state) {
+        public boolean isSource(@Nonnull FluidState state) {
             return false;
         }
 
         @Override
-        public int getAmount(FluidState state) {
+        public int getAmount(@Nonnull FluidState state) {
             return state.getValue(LEVEL);
         }
 
@@ -163,12 +147,12 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
         }
 
         @Override
-        public boolean isSource(FluidState state) {
+        public boolean isSource(@Nonnull FluidState state) {
             return true;
         }
 
         @Override
-        public int getAmount(FluidState state) {
+        public int getAmount(@Nonnull FluidState state) {
             return 8;
         }
 

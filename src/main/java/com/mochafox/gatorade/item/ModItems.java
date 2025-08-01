@@ -6,7 +6,6 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import com.mochafox.gatorade.Gatorade;
-
 import com.mochafox.gatorade.item.custom.InfiniteElectrolyteDrinkItem;
 import com.mochafox.gatorade.item.custom.SqueezeBottleItem;
 
