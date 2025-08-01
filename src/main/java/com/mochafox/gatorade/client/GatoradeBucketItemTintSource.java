@@ -11,23 +11,18 @@ import com.mojang.serialization.MapCodec;
 import net.minecraft.client.color.item.ItemTintSource;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.util.ARGB;
-import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.material.Fluid;
 
-public record GatoradeBucketItemTintSource(int defaultColor) implements ItemTintSource {
-    public static final MapCodec<GatoradeBucketItemTintSource> MAP_CODEC = ExtraCodecs.RGB_COLOR_CODEC.fieldOf("default")
-        .xmap(color -> new GatoradeBucketItemTintSource(ARGB.opaque(color)), source -> source.defaultColor);
-
-    public GatoradeBucketItemTintSource() {
-        this(ARGB.opaque(Gatorade.DEFAULT_FLUID_COLOR));
-    }
+public record GatoradeBucketItemTintSource() implements ItemTintSource {
+    public static final MapCodec<GatoradeBucketItemTintSource> MAP_CODEC = MapCodec.unit(GatoradeBucketItemTintSource::new);
 
     @Override
     public int calculate(@Nonnull ItemStack stack, @Nullable ClientLevel level, @Nullable LivingEntity entity) {
         Item item = stack.getItem();
+        int defaultColor = ARGB.opaque(Gatorade.DEFAULT_FLUID_COLOR);
 
         if (!(item instanceof GatoradeBucketItem)) {
             return defaultColor;
