@@ -52,7 +52,7 @@ public class InfiniteElectrolyteDrinkItem extends Item {
                 ElectrolytesUtil.addElectrolytes(player, electrolytesRestored);
 
                 // Show feedback to player
-                player.displayClientMessage(Component.translatable("item.gatorade.infinite_electrolyte_drink.drank.electrolytes"), true);
+                player.displayClientMessage(Component.translatable("item.gatorade.infinite_electrolyte_drink.drank"), true);
             }
         }
         

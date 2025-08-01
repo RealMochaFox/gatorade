@@ -18,6 +18,10 @@ import com.mochafox.gatorade.item.CapabilityHandler;
 import com.mochafox.gatorade.item.ModCreativeModeTabs;
 import com.mochafox.gatorade.item.ModDataComponents;
 import com.mochafox.gatorade.item.ModItems;
+import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
+
+import net.minecraft.world.level.material.Fluid;
+import net.minecraft.world.level.material.Fluids;
 
 /**
  * Gatorade Mod - Parody Disclaimer
@@ -59,5 +63,18 @@ public class Gatorade {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         LOGGER.info("ARE YOU JUICED UP? GATORADE MOD IS SLAMMING INTO YOUR UNIVERSE!");
+    }
+
+    /**
+     * Utility method to check if a fluid is a valid Gatorade fluid.
+     * In chaos mode, any non-empty fluid is considered valid.
+     * Otherwise, only GatoradeFluid instances are valid.
+     */
+    public static boolean isGatoradeFluid(Fluid fluid) {
+        if (Config.CHAOS_MODE.get() && fluid != Fluids.EMPTY) {
+            return true;
+        }
+        
+        return fluid instanceof GatoradeFluid;
     }
 }

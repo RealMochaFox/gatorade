@@ -1,11 +1,11 @@
 package com.mochafox.gatorade.block.custom;
 
-import com.mochafox.gatorade.Config;
 import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.block.entity.GatoradeCoolerBlockEntity;
 import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -59,8 +59,7 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
 
     @Override
     public boolean canPlaceLiquid(@Nullable LivingEntity entity, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Fluid fluid) {
-        if (!isGatoradeFluid(fluid)) {
-            Gatorade.LOGGER.debug("Invalid fluid for cooler: {}", fluid.toString());
+        if (!Gatorade.isGatoradeFluid(fluid)) {
             return false;
         }
 
@@ -87,8 +86,6 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
         FluidStack fluidInBucket = new FluidStack(fluidState.getType(), Gatorade.BUCKET_AMOUNT);
 
         int filled = blockFluidHandler.fill(fluidInBucket, IFluidHandler.FluidAction.EXECUTE);
-        Gatorade.LOGGER.debug("Placing liquid in cooler: {} Cooler is ({} mB/{} mB) filled", fluidInBucket.getFluid().toString(), 
-                              blockFluidHandler.getFluidInTank(0).getAmount(), blockFluidHandler.getTankCapacity(0));
         return filled > 0;
     }
 
@@ -104,11 +101,8 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
             return InteractionResult.PASS;
         }
 
-        Gatorade.LOGGER.info("Hit with a bucket: {}", stack.getItem().getDescriptionId());
-
         // Handle empty bucket - extract from cooler
         if (bucketItem.content == Fluids.EMPTY) {
-            Gatorade.LOGGER.debug("Attempting to fill bucket from cooler: {}", stack.getItem().getDescriptionId());
             return fillBucket(level, pos, stack, player, hand);
         } else {
             // Handle filled bucket - empty into cooler
@@ -141,8 +135,6 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
     }
 
     private InteractionResult fillBucket(Level level, BlockPos pos, ItemStack stack, Player player, InteractionHand hand) {
-        Gatorade.LOGGER.debug("Filling bucket from cooler: {}", stack.getItem().getDescriptionId());
-        
         BlockEntity blockEntity = level.getBlockEntity(pos);
         if (!(blockEntity instanceof GatoradeCoolerBlockEntity)) {
             return InteractionResult.PASS;
@@ -153,57 +145,43 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
         // Check if the cooler contains enough fluid to fill a bucket
         FluidStack currentFluid = blockFluidHandler.getFluidInTank(0);
         if (currentFluid.isEmpty()) {
-            Gatorade.LOGGER.debug("Cooler is empty, cannot fill bucket.");
+            player.displayClientMessage(Component.translatable("block.gatorade.gatorade_cooler_block.empty"), true);
             return InteractionResult.FAIL;
         }
 
         if (currentFluid.getAmount() < Gatorade.BUCKET_AMOUNT) {
-            Gatorade.LOGGER.debug("Cooler does not contain enough fluid to fill a bucket ({} mB/{} mB).", currentFluid.getAmount(), Gatorade.BUCKET_AMOUNT);
+            player.displayClientMessage(Component.translatable("block.gatorade.gatorade_cooler_block.not_enough_fluid_for_bucket", currentFluid.getAmount(), Gatorade.BUCKET_AMOUNT), true);
             return InteractionResult.FAIL;
         }
 
         // Require chaos mode to extract non-Gatorade fluids
         Fluid fluid = currentFluid.getFluid();
-        if (!isGatoradeFluid(fluid)) {
-            Gatorade.LOGGER.debug("Cooler contains invalid fluid: {}", currentFluid.getFluid().toString());
+            player.displayClientMessage(Component.translatable("block.gatorade.gatorade_cooler_block.contains_invalid_fluid", fluid.toString()), true);
             return InteractionResult.FAIL;
         }
 
         // Create filled bucket
         ItemStack filledBucket = new ItemStack(fluid.getBucket());
-        Gatorade.LOGGER.debug("bucket: {}; {}", filledBucket.getItem().getDescriptionId(), filledBucket.getItem());
-        Gatorade.LOGGER.debug("stack: {}; {}", stack.getItem().getDescriptionId(), stack.getItem());
 
         // Drain the fluid from the cooler
         blockFluidHandler.drain(Gatorade.BUCKET_AMOUNT, IFluidHandler.FluidAction.EXECUTE);
         
         // Handle inventory management
         if (!player.hasInfiniteMaterials()) {
-            Gatorade.LOGGER.debug("Removing one bucket from player's inventory: {}", stack.getItem().getDescriptionId());
             stack.shrink(1);
             
             if (stack.isEmpty()) {
                 player.setItemInHand(hand, filledBucket);
             } else if (!player.getInventory().add(filledBucket)) {
-                Gatorade.LOGGER.debug("Inventory full, dropping filled bucket on the ground.");
+                // If the inventory is full, drop the filled bucket
                 player.drop(filledBucket, false);
             }
         } else {
-            Gatorade.LOGGER.debug("Player has infinite materials, adding filled bucket directly to inventory.");
             if (!player.getInventory().add(filledBucket)) {
                 player.drop(filledBucket, false);
             }
         }
 
-        Gatorade.LOGGER.debug("Filled bucket with fluid: {}", fluid.toString());
         return InteractionResult.SUCCESS;
-    }
-
-    private boolean isGatoradeFluid(Fluid fluid) {
-        if (Config.CHAOS_MODE.get() && fluid != Fluids.EMPTY) {
-            return true;
-        }
-        
-        return fluid instanceof GatoradeFluid;
     }
 }

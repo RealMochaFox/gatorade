@@ -69,22 +69,15 @@
 - Fix issue where messages are displayed weirdly when bottle interacts with a bucket
 - Tweaks to ElectrolytesEvents
 
+### Electrolytes
+- Change electrolytes so they are only enabled in survival, as oppoed to being disabled in creative
+
 ## :: V1.0.0 :: TODO ::
 
 ### Biome / World Gen
 #### Gatorade Springs
 - Implement naturally occuring gatorade [springs](https://docs.neoforged.net/docs/worldgen/biomemodifier/#available-values-for-decoration-steps) that spawn
 - Gatorade springs should support spawning all kinds of gatorade fluids
-
-### Blocks & Items
-#### Squeeze Bottle
-- Right clicking Squeeze Bottle aimed at Gatorade Fluid should fill the Squeeze Bottle with that fluid [?]
-
-#### Gatorade Cooler Block
-- Right clicking Gatorade Cooler Block with an empty gatorade fluid bucket will fill the bucket from the Gatorade Cooler Block
-
-#### Gatorade Bucket Item
-- When emptied of fluid, it should take the texture of the empty gatorade bucket, not the minecraft bucket
 
 ### Misc
 - Add a couple florbalistican songs to the mod
@@ -95,12 +88,14 @@
 - Right clicking Squeeze Bottle aimed at a filled Gatorade Cooler Block should try to fill the Squeeze Bottle with that fluid
 - Right clicking Squeeze Bottle aimed at empty Gatorade Cooler Block should empty the Squeeze Bottle
 - Empty Squeeze Bottle should have a different texture than the filled Squeeze Bottle
+- Right clicking Squeeze Bottle aimed at Gatorade Fluid should fill the Squeeze Bottle with that fluid
 
 #### Gatorade Cooler Block
+- Right clicking Gatorade Cooler Block with an empty gatorade fluid bucket will fill the bucket from the Gatorade Cooler Block
 - shift+Right clicking Gatorade Cooler Block with filled Squeeze Bottle will empty the Squeeze Bottle into the Gatorade Cooler Block
 - Right clicking Gatorade Cooler Block with a gatorade fluid bucket will empty the bucket into the Gatorade Cooler Block
 - Right clicking Gatorade Cooler Block with an empty Squeeze Bottle will fill the Squeeze Bottle
-- Gatorade Cooler Block should only accept gatorade fluid
+- Gatorade Cooler Block should only accept gatorade fluid unless chaos mode is enabled
 - Gatorade Cooler Block should use [Capabilities.FluidHandler.ENTITY or Capabilities.FluidHandler.BLOCK](https://docs.neoforged.net/docs/datastorage/capabilities/)
 - Can be filled with Gatorade Fluid via:
     - Standardized fluid containers, such as buckets and tanks
@@ -140,3 +135,4 @@
 ### Misc
 - Establish crafting recipes
 - Fluids are dynamically iterated
+- Add messages to the cooler interactions
