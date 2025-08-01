@@ -1,14 +1,12 @@
 package com.mochafox.gatorade.item.capability;
 
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.material.Fluid;
 import net.neoforged.neoforge.fluids.FluidStack;
 import net.neoforged.neoforge.fluids.SimpleFluidContent;
 import net.neoforged.neoforge.fluids.capability.IFluidHandlerItem;
 
 import com.mochafox.gatorade.item.ModDataComponents;
-import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
-import com.mochafox.gatorade.Config;
+import com.mochafox.gatorade.Gatorade;
 
 import javax.annotation.Nonnull;
 
@@ -68,12 +66,12 @@ public class SqueezeBottleFluidHandler implements IFluidHandlerItem {
 
     @Override
     public boolean isFluidValid(int tank, @Nonnull FluidStack stack) {
-        return isGatoradeFluid(stack.getFluid());
+        return Gatorade.isGatoradeFluid(stack.getFluid());
     }
 
     @Override
     public int fill(@Nonnull FluidStack resource, @Nonnull FluidAction action) {
-        if (container.getCount() != 1 || resource.isEmpty() || !isGatoradeFluid(resource.getFluid())) {
+        if (container.getCount() != 1 || resource.isEmpty() || !Gatorade.isGatoradeFluid(resource.getFluid())) {
             return 0;
         }
 
@@ -119,7 +117,7 @@ public class SqueezeBottleFluidHandler implements IFluidHandlerItem {
         }
 
         FluidStack contained = getFluid();
-        if (contained.isEmpty() || !isGatoradeFluid(contained.getFluid())) {
+        if (contained.isEmpty() || !Gatorade.isGatoradeFluid(contained.getFluid())) {
             return FluidStack.EMPTY;
         }
 
@@ -137,16 +135,5 @@ public class SqueezeBottleFluidHandler implements IFluidHandlerItem {
         }
 
         return drained;
-    }
-
-    /**
-     * Checks if a fluid is a Gatorade fluid that this bottle can accept
-     */
-    private boolean isGatoradeFluid(Fluid fluid) {
-        if (Config.CHAOS_MODE.get()) {
-            return true;
-        }
-
-        return fluid instanceof GatoradeFluid;
     }
 }

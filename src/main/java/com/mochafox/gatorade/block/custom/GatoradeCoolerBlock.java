@@ -1,9 +1,7 @@
 package com.mochafox.gatorade.block.custom;
 
-import com.mochafox.gatorade.Config;
 import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.block.entity.GatoradeCoolerBlockEntity;
-import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -60,7 +58,7 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
 
     @Override
     public boolean canPlaceLiquid(@Nullable LivingEntity entity, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nonnull BlockState state, @Nonnull Fluid fluid) {
-        if (!isGatoradeFluid(fluid)) {
+        if (!Gatorade.isGatoradeFluid(fluid)) {
             return false;
         }
 
@@ -157,7 +155,7 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
 
         // Require chaos mode to extract non-Gatorade fluids
         Fluid fluid = currentFluid.getFluid();
-        if (!isGatoradeFluid(fluid)) {
+        if (!Gatorade.isGatoradeFluid(fluid)) {
             player.displayClientMessage(Component.translatable("block.gatorade.gatorade_cooler_block.contains_invalid_fluid", fluid.toString()), true);
             return InteractionResult.FAIL;
         }
@@ -185,13 +183,5 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
         }
 
         return InteractionResult.SUCCESS;
-    }
-
-    private boolean isGatoradeFluid(Fluid fluid) {
-        if (Config.CHAOS_MODE.get() && fluid != Fluids.EMPTY) {
-            return true;
-        }
-        
-        return fluid instanceof GatoradeFluid;
     }
 }

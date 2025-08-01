@@ -195,7 +195,7 @@ public class SqueezeBottleItem extends Item {
         }
         
         // Return out if no valid fluid found
-        if (fluid == null || !isSource || fluidPos == null || !isGatoradeFluid(fluid)) {
+        if (fluid == null || !isSource || fluidPos == null || !Gatorade.isGatoradeFluid(fluid)) {
             return InteractionResult.PASS;
         }
         
@@ -248,17 +248,6 @@ public class SqueezeBottleItem extends Item {
         return InteractionResult.PASS;
     }
     
-    /**
-     * Checks if a fluid is a Gatorade fluid that can be used with the squeeze bottle
-     */
-    private boolean isGatoradeFluid(Fluid fluid) {
-        if (Config.CHAOS_MODE.get()) {
-            return true;
-        }
-        
-        return fluid instanceof GatoradeFluid;
-    }
-
     private InteractionResult fillSqueezeBottle(FluidStack itemFluid, IFluidHandlerItem itemFluidHandler, FluidStack blockFluid, IFluidHandler blockFluidHandler, Player player, InteractionHand hand) {
         FluidStack toTransfer = blockFluidHandler.drain(CAPACITY, IFluidHandler.FluidAction.SIMULATE);
         int filled = itemFluidHandler.fill(toTransfer, IFluidHandler.FluidAction.SIMULATE);
