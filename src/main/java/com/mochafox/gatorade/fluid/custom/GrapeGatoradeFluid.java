@@ -17,9 +17,9 @@ public class GrapeGatoradeFluid extends GatoradeFluid.SourceGatoradeFluid {
     private static final GatoradeFluid.FluidRegistrySet<GrapeGatoradeFluid> REGISTRY_SET = 
         GatoradeFluid.registerFluidSet(NAME, 
             () -> new GrapeGatoradeFluid(getProperties()),
-            1050,
-            1200,
-            295
+            1030,  // kg/m³ - density of chilled Gatorade (higher than water due to sugars/electrolytes)
+            1300,  // mPa·s - viscosity of chilled Gatorade (slightly higher than water due to dissolved solids)
+            276    // K - temperature of chilled Gatorade (3°C, typical refrigeration temperature)
         );
 
     public static final DeferredHolder<FluidType, FluidType> TYPE = REGISTRY_SET.type;
