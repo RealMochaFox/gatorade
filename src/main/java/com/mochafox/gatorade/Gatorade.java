@@ -22,6 +22,8 @@ import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import com.mochafox.gatorade.datagen.GatoradeDataGenerators;
 
 /**
  * Gatorade Mod - Parody Disclaimer
@@ -43,6 +45,10 @@ public class Gatorade {
 
     public Gatorade(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
+
+        // Datagen stuff
+        modEventBus.addListener((GatherDataEvent.Server e) -> GatoradeDataGenerators.onGatherData(e));
+        modEventBus.addListener((GatherDataEvent.Client e) -> GatoradeDataGenerators.onGatherData(e));
 
         // Register all mod registries
         ModBlocks.register(modEventBus);

@@ -1,9 +1,9 @@
 {
-  "feature": "gatorade:glacier_freeze_gatorade_lake",
+  "feature": "gatorade:glacier_freeze_gatorade_gatorade_lake",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 300
+      "chance": 220
     },
     {
       "type": "minecraft:in_square"

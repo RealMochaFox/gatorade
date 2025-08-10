@@ -1,9 +1,9 @@
 {
-  "feature": "gatorade:fruit_punch_gatorade_lake",
+  "feature": "gatorade:cool_blue_gatorade_gatorade_lake",
   "placement": [
     {
       "type": "minecraft:rarity_filter",
-      "chance": 200
+      "chance": 220
     },
     {
       "type": "minecraft:in_square"
