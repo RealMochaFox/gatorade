@@ -111,6 +111,17 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
 
     private InteractionResult emptyBucket(Level level, BlockPos pos, ItemStack stack, Player player, InteractionHand hand, Fluid fluid) {
         if (!canPlaceLiquid(player, level, pos, level.getBlockState(pos), fluid)) {
+            BlockEntity blockEntity = level.getBlockEntity(pos);
+            if (blockEntity instanceof GatoradeCoolerBlockEntity) {
+                IFluidHandler blockFluidHandler = ((GatoradeCoolerBlockEntity) blockEntity).getFluidHandler();
+                FluidStack currentFluid = blockFluidHandler.getFluidInTank(0);
+                
+                if (!currentFluid.isEmpty() && !FluidStack.isSameFluidSameComponents(currentFluid, new FluidStack(fluid, Gatorade.BUCKET_AMOUNT))) {
+                    // Different fluids
+                    player.displayClientMessage(Component.translatable("block.gatorade.gatorade_cooler_block.different_fluid"), true);
+                    return InteractionResult.FAIL;
+                }
+            }
             return InteractionResult.FAIL;
         }
 
