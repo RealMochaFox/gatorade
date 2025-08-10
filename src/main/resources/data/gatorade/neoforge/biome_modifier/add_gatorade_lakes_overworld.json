@@ -1,0 +1,11 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#gatorade:has_gatorade_lakes",
+  "features": [
+    "gatorade:fruit_punch_gatorade_lake",
+    "gatorade:lemon_lime_gatorade_lake",
+    "gatorade:orange_gatorade_lake",
+    "gatorade:cool_blue_gatorade_lake"
+  ],
+  "step": "local_modifications"
+}
