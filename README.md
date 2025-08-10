@@ -11,7 +11,7 @@
 
 ## About
 
-A NeoForge mod for Minecraft that adds Gatorade as a naturally occurring resource to the world. Find gatorade springs, fill your gatorade bucket and drink from a gatorade squeeze bottle.
+A NeoForge mod for Minecraft that adds Gatorade as a naturally occurring resource to the world. Find gatorade lakes, fill your gatorade bucket and drink from a gatorade squeeze bottle.
 
 ## Features
 

@@ -73,16 +73,12 @@
 - Change electrolytes so they are only enabled in survival, as oppoed to being disabled in creative
 
 ## :: V1.0.0 :: TODO ::
-
-### Biome / World Gen
-#### Gatorade Springs
-- Implement naturally occuring gatorade [springs](https://docs.neoforged.net/docs/worldgen/biomemodifier/#available-values-for-decoration-steps) that spawn
-- Gatorade springs should support spawning all kinds of gatorade fluids
-
-### Misc
-- Add a couple florbalistican songs to the mod
-
+- small bugfixes
 ## :: V1.0.0 :: Completed Tasks ::
+### Biome / World Gen
+#### Gatorade Lakes
+- Implement naturally occuring gatorade [lakes](https://docs.neoforged.net/docs/worldgen/biomemodifier/#available-values-for-decoration-steps) that spawn
+- Gatorade lakes should support spawning all kinds of gatorade fluids
 ### Blocks & Items
 #### Squeeze Bottle
 - Right clicking Squeeze Bottle aimed at a filled Gatorade Cooler Block should try to fill the Squeeze Bottle with that fluid
