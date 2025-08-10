@@ -16,3 +16,6 @@ runs/
 *.md
 !README.md
 *.jar
+
+.vscode/
+!.vscode/extensions.json

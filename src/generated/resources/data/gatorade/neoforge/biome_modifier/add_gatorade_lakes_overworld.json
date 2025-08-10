@@ -1,0 +1,21 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "#minecraft:is_overworld",
+  "features": [
+    "gatorade:fruit_punch_gatorade_gatorade_lake",
+    "gatorade:lemon_lime_gatorade_gatorade_lake",
+    "gatorade:orange_gatorade_gatorade_lake",
+    "gatorade:cool_blue_gatorade_gatorade_lake",
+    "gatorade:lime_cucumber_gatorade_gatorade_lake",
+    "gatorade:lightning_blast_gatorade_gatorade_lake",
+    "gatorade:midnight_ice_gatorade_gatorade_lake",
+    "gatorade:glacier_freeze_gatorade_gatorade_lake",
+    "gatorade:glacier_cherry_gatorade_gatorade_lake",
+    "gatorade:arctic_blitz_gatorade_gatorade_lake",
+    "gatorade:grape_gatorade_gatorade_lake",
+    "gatorade:strawberry_gatorade_gatorade_lake",
+    "gatorade:blue_cherry_gatorade_gatorade_lake",
+    "gatorade:green_apple_gatorade_gatorade_lake"
+  ],
+  "step": "lakes"
+}
