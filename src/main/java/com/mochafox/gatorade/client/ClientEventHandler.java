@@ -4,6 +4,9 @@ import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.fluid.ModFluids;
 import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.chunk.ChunkSectionLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.client.event.RegisterColorHandlersEvent;
 import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
@@ -11,6 +14,8 @@ import net.neoforged.neoforge.client.event.RegisterConditionalItemModelPropertyE
 import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
+
+import javax.annotation.Nonnull;
 
 /**
  * Client-side event handlers and registrations.
@@ -46,10 +51,16 @@ public class ClientEventHandler {
     public static void registerClientExtensions(RegisterClientExtensionsEvent event) {
         // Register all Gatorade fluid client extensions
         ModFluids.FLUIDS.getEntries().forEach(entry -> {
-            if (entry.get() instanceof GatoradeFluid.SourceGatoradeFluid) {
-                GatoradeFluid.SourceGatoradeFluid fluid = (GatoradeFluid.SourceGatoradeFluid) entry.get();
-                registerGatoradeFluidExtension(event, fluid.getFluidType(), fluid.getTintColor());
+            GatoradeFluid fluid = (GatoradeFluid) entry.get();
+            if (fluid instanceof GatoradeFluid.SourceGatoradeFluid) {
+                GatoradeFluid.SourceGatoradeFluid sourceFluid = (GatoradeFluid.SourceGatoradeFluid) fluid;
+                registerGatoradeFluidExtension(event, sourceFluid.getFluidType(), sourceFluid.getTintColor());
             }
+
+            ItemBlockRenderTypes.setRenderLayer(
+                fluid,
+                ChunkSectionLayer.TRANSLUCENT
+            );
         });
     }
 
@@ -68,6 +79,7 @@ public class ClientEventHandler {
             private static final ResourceLocation STILL_TEXTURE = ResourceLocation.parse("minecraft:block/water_still");
             private static final ResourceLocation FLOWING_TEXTURE = ResourceLocation.parse("minecraft:block/water_flow");
             private static final ResourceLocation OVERLAY_TEXTURE = ResourceLocation.parse("minecraft:block/water_overlay");
+            private static final ResourceLocation RENDER_OVERLAY_TEXTURE = ResourceLocation.parse("minecraft:textures/misc/underwater.png");
 
             @Override
             public ResourceLocation getStillTexture() {
@@ -82,6 +94,11 @@ public class ClientEventHandler {
             @Override
             public ResourceLocation getOverlayTexture() {
                 return OVERLAY_TEXTURE;
+            }
+
+            @Override
+            public ResourceLocation getRenderOverlayTexture(@Nonnull Minecraft mc) {
+                return RENDER_OVERLAY_TEXTURE;
             }
 
             @Override
