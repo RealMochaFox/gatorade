@@ -42,7 +42,7 @@ public class LakePlacedFeatureProvider implements DataProvider {
 
         JsonObject rarity = new JsonObject();
         rarity.addProperty("type", "minecraft:rarity_filter");
-        rarity.addProperty("chance", 220);
+        rarity.addProperty("chance", 2000);
         placement.add(rarity);
 
         JsonObject inSquare = new JsonObject();
