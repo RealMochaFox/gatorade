@@ -7,5 +7,6 @@ public class GatoradeDataGenerators {
         event.createProvider(LakeConfiguredFeatureProvider::new);
         event.createProvider(LakePlacedFeatureProvider::new);
         event.createProvider(LakeBiomeModifierProvider::new);
+        event.createProvider(GatoradeFluidTagsProvider::new);
     }
 }

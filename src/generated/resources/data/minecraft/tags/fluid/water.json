@@ -1,0 +1,33 @@
+{
+  "replace": false,
+  "values": [
+    "gatorade:fruit_punch_gatorade",
+    "gatorade:fruit_punch_gatorade_flowing",
+    "gatorade:lemon_lime_gatorade",
+    "gatorade:lemon_lime_gatorade_flowing",
+    "gatorade:orange_gatorade",
+    "gatorade:orange_gatorade_flowing",
+    "gatorade:cool_blue_gatorade",
+    "gatorade:cool_blue_gatorade_flowing",
+    "gatorade:lime_cucumber_gatorade",
+    "gatorade:lime_cucumber_gatorade_flowing",
+    "gatorade:lightning_blast_gatorade",
+    "gatorade:lightning_blast_gatorade_flowing",
+    "gatorade:midnight_ice_gatorade",
+    "gatorade:midnight_ice_gatorade_flowing",
+    "gatorade:glacier_freeze_gatorade",
+    "gatorade:glacier_freeze_gatorade_flowing",
+    "gatorade:glacier_cherry_gatorade",
+    "gatorade:glacier_cherry_gatorade_flowing",
+    "gatorade:arctic_blitz_gatorade",
+    "gatorade:arctic_blitz_gatorade_flowing",
+    "gatorade:grape_gatorade",
+    "gatorade:grape_gatorade_flowing",
+    "gatorade:strawberry_gatorade",
+    "gatorade:strawberry_gatorade_flowing",
+    "gatorade:blue_cherry_gatorade",
+    "gatorade:blue_cherry_gatorade_flowing",
+    "gatorade:green_apple_gatorade",
+    "gatorade:green_apple_gatorade_flowing"
+  ]
+}
