@@ -10,12 +10,14 @@ import com.mochafox.gatorade.fluid.ModFluids;
 import com.mochafox.gatorade.item.ModItems;
 import com.mochafox.gatorade.item.custom.GatoradeBucketItem;
 
+import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.level.block.LiquidBlock;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.MapColor;
+import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.fluids.FluidType;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -37,21 +39,6 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
     public abstract int getTintColor();
 
     /**
-     * Creates a FluidType with the specified physical properties.
-     * 
-     * @param density the fluid density (kg/m³)
-     * @param viscosity the fluid viscosity (mPa·s)
-     * @param temperature the fluid temperature (K)
-     * @return configured FluidType
-     */
-    protected static FluidType createFluidType(int density, int viscosity, int temperature) {
-        return new FluidType(FluidType.Properties.create()
-            .density(density)
-            .viscosity(viscosity)
-            .temperature(temperature));
-    }
-
-    /**
      * Helper class for registering a complete set of Gatorade fluid objects.
      */
     public static class FluidRegistrySet<T extends SourceGatoradeFluid> {
@@ -62,30 +49,41 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
         public final DeferredItem<BucketItem> bucket;
 
         private FluidRegistrySet(String name, Supplier<T> sourceFactory, int density, int viscosity, int temperature) {
-            this.type = ModFluids.FLUID_TYPES.register(name, () -> createFluidType(density, viscosity, temperature));
-            
+            this.type = ModFluids.FLUID_TYPES.register(name, () -> new FluidType(FluidType.Properties.create()
+                    .density(density).viscosity(viscosity).temperature(temperature)
+                    .canHydrate(true).canConvertToSource(true)
+                    .supportsBoating(true).canSwim(true).fallDistanceModifier(0.0f)
+                    .lightLevel(0)
+                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
+                    .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH)
+            ));
+
             this.source = ModFluids.FLUIDS.register(name, sourceFactory);
-            
-            this.flowing = ModFluids.FLUIDS.register(name + "_flowing", 
-                () -> new FlowingGatoradeFluid(createLazyProperties()));
-            
-            this.block = ModBlocks.BLOCKS.registerBlock(name + "_block", 
-                properties -> new LiquidBlock(source.get(), properties
-                    .mapColor(MapColor.WATER)
-                    .noCollission()
-                    .strength(100.0F)
-                    .noLootTable()));
-            
+
+            this.flowing = ModFluids.FLUIDS.register(name + "_flowing",
+                    () -> new FlowingGatoradeFluid(createLazyProperties()));
+
+            this.block = ModBlocks.BLOCKS.registerBlock(name + "_block",
+                    properties -> new LiquidBlock(source.get(), properties
+                            .mapColor(MapColor.WATER)
+                            .replaceable()
+                            .noCollission()
+                            .strength(100.0F)
+                            .noLootTable()
+                            .ignitedByLava()
+            ));
+
             this.bucket = ModItems.ITEMS.registerItem(name + "_bucket",
-                properties -> new GatoradeBucketItem(source.get(), properties.stacksTo(1)));
+                    properties -> new GatoradeBucketItem(source.get(), properties.stacksTo(1)));
         }
 
         private BaseFlowingFluid.Properties createLazyProperties() {
             Supplier<? extends BaseFlowingFluid> sourceSupplier = () -> (BaseFlowingFluid) source.get();
             Supplier<? extends BaseFlowingFluid> flowingSupplier = () -> flowing.get();
             return new Properties(type, sourceSupplier, flowingSupplier)
-                .bucket(() -> bucket.get())
-                .block(() -> block.get());
+                    .bucket(() -> bucket.get())
+                    .block(() -> block.get());
         }
 
         /**
@@ -99,12 +97,12 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
     /**
      * Registers a complete set of fluid objects for a Gatorade flavor.
      * 
-     * @param <T> the source fluid type
-     * @param name the base name for registration
+     * @param <T>           the source fluid type
+     * @param name          the base name for registration
      * @param sourceFactory factory for creating the source fluid instance
-     * @param density fluid density in kg/m³
-     * @param viscosity fluid viscosity in mPa·s
-     * @param temperature fluid temperature in K
+     * @param density       fluid density in kg/m³
+     * @param viscosity     fluid viscosity in mPa·s
+     * @param temperature   fluid temperature in K
      * @return a FluidRegistrySet containing all registered objects
      */
     public static <T extends SourceGatoradeFluid> FluidRegistrySet<T> registerFluidSet(
@@ -139,7 +137,7 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
             return Gatorade.DEFAULT_FLUID_COLOR;
         }
     }
- 
+
     /** A source variant for custom fluids. */
     public static class SourceGatoradeFluid extends GatoradeFluid {
         public SourceGatoradeFluid(Properties properties) {
