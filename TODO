@@ -72,9 +72,7 @@
 ### Electrolytes
 - Change electrolytes so they are only enabled in survival, as oppoed to being disabled in creative
 
-## :: V1.0.0 :: TODO ::
-- small bugfixes
-## :: V1.0.0 :: Completed Tasks ::
+## :: V1.0.0 ::
 ### Biome / World Gen
 #### Gatorade Lakes
 - Implement naturally occuring gatorade [lakes](https://docs.neoforged.net/docs/worldgen/biomemodifier/#available-values-for-decoration-steps) that spawn
