@@ -1,0 +1,32 @@
+{
+  "display": {
+    "icon": {
+      "id": "gatorade:squeeze_bottle"
+    },
+    "title": {
+      "translate": "advancement.gatorade.obtain_squeeze_bottle.title"
+    },
+    "description": {
+      "translate": "advancement.gatorade.obtain_squeeze_bottle.desc"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "parent": "gatorade:gatorade/root",
+  "criteria": {
+    "obtain_cooler": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "gatorade:squeeze_bottle"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

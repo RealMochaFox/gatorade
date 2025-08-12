@@ -27,6 +27,8 @@
   "advancement.gatorade.drink_all_gatorade.desc": "Drank every type of Gatorade. Truly a connoisseur!",
   "advancement.gatorade.obtain_cooler.title": "Big Shot",
   "advancement.gatorade.obtain_cooler.desc": "Obtained a Gatorade Cooler. Now you're a real team player!",
+  "advancement.gatorade.obtain_squeeze_bottle.title": "Squeeze Play",
+  "advancement.gatorade.obtain_squeeze_bottle.desc": "Obtained a Squeeze Bottle. Now you're ready to hydrate on the go!",
 
   "block.gatorade.gatorade_cooler_block": "Gatorade Cooler",
   "block.gatorade.gatorade_cooler_block.empty": "The Gatorade Cooler is empty!",
