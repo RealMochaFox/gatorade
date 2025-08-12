@@ -38,6 +38,6 @@ public class ArcticBlitzGatoradeFluid extends GatoradeFluid.SourceGatoradeFluid 
 
     @Override
     public int getTintColor() {
-        return 0x66c0ffff; // light cyan with water-level transparency
+        return 0xBBc0ffff; // light cyan with water-level transparency
     }
 }

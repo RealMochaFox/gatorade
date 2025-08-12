@@ -38,6 +38,6 @@ public class LightningBlastGatoradeFluid extends GatoradeFluid.SourceGatoradeFlu
 
     @Override
     public int getTintColor() {
-        return 0x66ffff00; // bright yellow with water-level transparency
+        return 0xBBffff00; // bright yellow with water-level transparency
     }
 }

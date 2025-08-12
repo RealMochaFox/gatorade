@@ -38,6 +38,6 @@ public class FruitPunchGatoradeFluid extends GatoradeFluid.SourceGatoradeFluid {
 
     @Override
     public int getTintColor() {
-        return 0x66ff0000; // red with water-level transparency
+        return 0xBBff0000; // red with water-level transparency
     }
 }

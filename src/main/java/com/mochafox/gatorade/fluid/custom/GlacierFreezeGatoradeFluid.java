@@ -38,6 +38,6 @@ public class GlacierFreezeGatoradeFluid extends GatoradeFluid.SourceGatoradeFlui
 
     @Override
     public int getTintColor() {
-        return 0x6640c0ff; // light blue with water-level transparency
+        return 0xBB40c0ff; // light blue with water-level transparency
     }
 }

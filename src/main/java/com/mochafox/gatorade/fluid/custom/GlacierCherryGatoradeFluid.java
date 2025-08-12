@@ -38,6 +38,6 @@ public class GlacierCherryGatoradeFluid extends GatoradeFluid.SourceGatoradeFlui
 
     @Override
     public int getTintColor() {
-        return 0x66ff4080; // pink-red with water-level transparency
+        return 0xBBff4080; // pink-red with water-level transparency
     }
 }

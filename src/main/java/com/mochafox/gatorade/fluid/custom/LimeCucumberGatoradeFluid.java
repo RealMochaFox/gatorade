@@ -38,6 +38,6 @@ public class LimeCucumberGatoradeFluid extends GatoradeFluid.SourceGatoradeFluid
 
     @Override
     public int getTintColor() {
-        return 0x6680ff80; // light green with water-level transparency
+        return 0xBB80ff80; // light green with water-level transparency
     }
 }
