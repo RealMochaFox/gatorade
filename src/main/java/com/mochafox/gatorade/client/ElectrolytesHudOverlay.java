@@ -38,9 +38,15 @@ public class ElectrolytesHudOverlay implements GuiLayer {
             
             // Position the electrolytes bar above the food bar
             // Food bar is at (screenWidth / 2 + 10, screenHeight - 39)
-            // So we position electrolytes bar 12 pixels above it
+            // Default position is 12 pixels above the food bar
             int x = screenWidth / 2 + 10;
             int y = screenHeight - 51; // 39 + 12 = 51
+            
+            // Check if player is underwater and has less than maximum air supply
+            if (player.isUnderWater() || player.getAirSupply() < player.getMaxAirSupply()) {
+                // Move electrolytes bar higher to avoid collision with oxygen bar
+                y = screenHeight - 60;
+            }
             
             renderElectrolytesBar(guiGraphics, player, x, y);
         }
