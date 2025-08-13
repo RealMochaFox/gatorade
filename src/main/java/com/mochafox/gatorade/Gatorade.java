@@ -12,6 +12,7 @@ import net.neoforged.fml.ModContainer;
 import com.mochafox.gatorade.advancement.ModAdvancementTriggers;
 import com.mochafox.gatorade.block.ModBlocks;
 import com.mochafox.gatorade.block.ModBlockEntities;
+import com.mochafox.gatorade.fluid.FluidEvents;
 import com.mochafox.gatorade.fluid.ModFluids;
 import com.mochafox.gatorade.item.CapabilityHandler;
 import com.mochafox.gatorade.item.ModCreativeModeTabs;
@@ -61,6 +62,7 @@ public class Gatorade {
 
         // Register listeners
         modEventBus.addListener(CapabilityHandler::registerCapabilities);
+        NeoForge.EVENT_BUS.addListener(FluidEvents::onEntityTick);
         NeoForge.EVENT_BUS.addListener(ElectrolytesEvents::onPlayerTick);
         NeoForge.EVENT_BUS.addListener(ElectrolytesEvents::onRegisterCommands);
 

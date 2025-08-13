@@ -3,6 +3,7 @@ package com.mochafox.gatorade.fluid.custom;
 import java.util.function.Supplier;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.block.ModBlocks;
@@ -10,18 +11,24 @@ import com.mochafox.gatorade.fluid.ModFluids;
 import com.mochafox.gatorade.item.ModItems;
 import com.mochafox.gatorade.item.custom.GatoradeBucketItem;
 
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.Mob;
 import net.minecraft.world.item.BucketItem;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.GameRules;
+import net.minecraft.world.level.LevelReader;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.LiquidBlock;
+import net.minecraft.world.level.block.PointedDripstoneBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.pathfinder.PathType;
-import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.common.SoundActions;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
 import net.neoforged.neoforge.fluids.FluidType;
@@ -55,22 +62,30 @@ public abstract class GatoradeFluid extends BaseFlowingFluid {
 
         private FluidRegistrySet(String name, Supplier<T> sourceFactory, int density, int viscosity, int temperature) {
             this.type = ModFluids.FLUID_TYPES.register(name, () -> new FluidType(FluidType.Properties.create()
-                    .density(density).viscosity(viscosity).temperature(temperature)
-                    .canHydrate(true).canConvertToSource(true)
-                    .supportsBoating(true)
-                    .fallDistanceModifier(0.0f).canSwim(true)
-                    .canExtinguish(true)
-                    .lightLevel(0)
-                    .canSwim(true)
-                    .canPushEntity(true)
-                    .canDrown(true)
-                    .motionScale(0.0)
-                    .pathType(PathType.WATER)
-                    .adjacentPathType(PathType.WATER_BORDER)
-                    .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
-                    .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
-                    .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH)
-            ));
+                .density(density).viscosity(viscosity).temperature(temperature)
+                .fallDistanceModifier(0F)
+                .canExtinguish(true)
+                .canConvertToSource(true)
+                .supportsBoating(true)
+                .sound(SoundActions.BUCKET_FILL, SoundEvents.BUCKET_FILL)
+                .sound(SoundActions.BUCKET_EMPTY, SoundEvents.BUCKET_EMPTY)
+                .sound(SoundActions.FLUID_VAPORIZE, SoundEvents.FIRE_EXTINGUISH)
+                .canHydrate(true)
+                .addDripstoneDripping(PointedDripstoneBlock.WATER_TRANSFER_PROBABILITY_PER_RANDOM_TICK, ParticleTypes.DRIPPING_DRIPSTONE_WATER, Blocks.WATER_CAULDRON, SoundEvents.POINTED_DRIPSTONE_DRIP_WATER_INTO_CAULDRON)) {
+                    @Override
+                    public boolean canConvertToSource(@Nonnull FluidState state, @Nonnull LevelReader reader, @Nonnull BlockPos pos) {
+                        if (reader instanceof ServerLevel level) {
+                            return level.getGameRules().getBoolean(GameRules.RULE_WATER_SOURCE_CONVERSION);
+                        }
+                        return super.canConvertToSource(state, reader, pos);
+                    }
+
+                    @Override
+                    public @Nullable PathType getBlockPathType(@Nonnull FluidState state, @Nonnull BlockGetter level, @Nonnull BlockPos pos, @Nullable Mob mob, boolean canFluidLog) {
+                        return canFluidLog ? super.getBlockPathType(state, level, pos, mob, true) : null;
+                    }
+                }
+            );
 
             this.source = ModFluids.FLUIDS.register(name, sourceFactory);
 

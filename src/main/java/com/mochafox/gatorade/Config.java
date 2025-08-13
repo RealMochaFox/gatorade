@@ -16,6 +16,10 @@ public class Config {
     public static final ModConfigSpec.IntValue ELECTROLYTES_MOVE_DECAY_RATE;
     public static final ModConfigSpec.IntValue MAX_ELECTROLYTES;
     public static final ModConfigSpec.IntValue DEFAULT_ELECTROLYTES;
+    public static final ModConfigSpec.BooleanValue GATORADE_BATHING_REGENERATION_ELECTROLYTE_EFFECTS;
+    public static final ModConfigSpec.BooleanValue GATORADE_BATHING_REGENERATION_PHYSICAL_EFFECTS;
+    public static final ModConfigSpec.IntValue GATORADE_BATHING_REGENERATION_RATE;
+    public static final ModConfigSpec.IntValue GATORADE_BATHING_REGENERATION_AMOUNT;
 
     static {
 
@@ -56,6 +60,22 @@ public class Config {
         DEFAULT_ELECTROLYTES = BUILDER
                 .comment("Default electrolytes level when a player joins.")
                 .defineInRange("defaultElectrolytes", 1000, 100, 1000); // Default 1000, range 100-1000
+
+        GATORADE_BATHING_REGENERATION_ELECTROLYTE_EFFECTS = BUILDER
+                .comment("Enable regeneration of electrolytes while in Gatorade.")
+                .define("gatoradeBathingRegenerationElectrolyteEffects", true);
+
+        GATORADE_BATHING_REGENERATION_PHYSICAL_EFFECTS = BUILDER
+                .comment("Enable physical effects while in Gatorade.")
+                .define("gatoradeBathingRegenerationPhysicalEffects", true);
+
+        GATORADE_BATHING_REGENERATION_RATE = BUILDER
+                .comment("Rate at which players regenerate electrolytes while in Gatorade.")
+                .defineInRange("gatoradeBathingRegenerationRate", 600, 1, 1200);
+
+        GATORADE_BATHING_REGENERATION_AMOUNT = BUILDER
+                .comment("Amount of electrolytes restored per tick while in Gatorade.")
+                .defineInRange("gatoradeBathingRegenerationAmount", 80, 0, 1000);
 
         BUILDER.pop();
     }
