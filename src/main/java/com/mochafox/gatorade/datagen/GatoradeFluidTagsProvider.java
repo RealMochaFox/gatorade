@@ -1,50 +1,32 @@
 package com.mochafox.gatorade.datagen;
-
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.fluid.ModFluids;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataProvider;
-import net.minecraft.data.PackOutput;
-import net.minecraft.data.PackOutput.PathProvider;
-import net.minecraft.resources.ResourceLocation;
 
-import javax.annotation.Nonnull;
-import java.nio.file.Path;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.FluidTagsProvider;
+import net.minecraft.data.tags.TagAppender;
+import net.minecraft.tags.FluidTags;
+import net.minecraft.world.level.material.Fluid;
+
 import java.util.concurrent.CompletableFuture;
 
-public class GatoradeFluidTagsProvider implements DataProvider {
-    private final PathProvider pathProvider;
+import javax.annotation.Nonnull;
 
-    public GatoradeFluidTagsProvider(PackOutput output) {
-        this.pathProvider = output.createPathProvider(PackOutput.Target.DATA_PACK, "tags/fluid");
+public class GatoradeFluidTagsProvider extends FluidTagsProvider {
+
+    public GatoradeFluidTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider, Gatorade.MODID);
     }
 
     @Override
-    public CompletableFuture<?> run(@Nonnull CachedOutput cache) {
-        return generateWaterTag(cache);
-    }
-
-    private CompletableFuture<?> generateWaterTag(CachedOutput cache) {
-        JsonObject json = new JsonObject();
-        json.addProperty("replace", false);
+    protected void addTags(@Nonnull HolderLookup.Provider provider) {
+        TagAppender<Fluid, Fluid> waterTag = this.tag(FluidTags.WATER);
         
-        JsonArray values = new JsonArray();
-        
-        // Add all Gatorade source and flowing fluids to the water tag
+        // Add all Gatorade fluids to the water tag
         ModFluids.FLUIDS.getEntries().stream()
-                .filter(holder -> holder.getId().getNamespace().equals(Gatorade.MODID))
-                .forEach(holder -> values.add(holder.getId().toString()));
-        
-        json.add("values", values);
-        
-        Path path = this.pathProvider.json(ResourceLocation.withDefaultNamespace("water"));
-        return DataProvider.saveStable(cache, json, path);
-    }
-
-    @Override
-    public String getName() {
-        return "Gatorade Fluid Tags";
+                .forEach(holder -> {
+                    waterTag.add(holder.get());
+                });
     }
 }
