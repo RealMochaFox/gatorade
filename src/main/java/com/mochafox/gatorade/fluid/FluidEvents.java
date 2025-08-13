@@ -6,7 +6,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.mochafox.gatorade.Config;
-import com.mochafox.gatorade.Gatorade;
 import com.mochafox.gatorade.electrolytes.ElectrolytesUtil;
 
 import net.minecraft.core.particles.ParticleTypes;
@@ -75,11 +74,7 @@ public class FluidEvents {
 
         if (currentTime % gatoradeBathingRegenerationRate == 0) {
             ElectrolytesUtil.addElectrolytes(player, gatoradeBathingRegenerationAmount);
-            player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, player.getX(), player.getY() + 1, player.getZ() + 1, 0, 0, 0);
-            player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, player.getX(), player.getY() + 1, player.getZ() + 1, 0, 0, 0);
-            player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, player.getX(), player.getY() + 1, player.getZ() + 1, 0, 0, 0);
-            player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, player.getX(), player.getY() + 1, player.getZ() + 1, 0, 0, 0);
-            player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, player.getX(), player.getY() + 1, player.getZ() + 1, 0, 0, 0);
+            player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, player.getX(), player.getY() + 1.5, player.getZ(), 0, 0, 0);
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.VILLAGER_CELEBRATE, SoundSource.PLAYERS, 1.0F, 1.0F);
         }
     }
