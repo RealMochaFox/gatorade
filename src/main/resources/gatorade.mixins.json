@@ -1,0 +1,12 @@
+{
+  "required": true,
+  "package": "com.mochafox.gatorade.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "refmap": "gatorade.refmap.json",
+  "plugin": "com.mochafox.gatorade.mixin.LakeFeatureFreezeCheckMixinPlugin",
+  "mixins": [
+    "LakeFeatureFreezeCheckRedirectMixin"
+  ],
+  "injectors": { "defaultRequire": 1 },
+  "minVersion": "0.8.5"
+}
