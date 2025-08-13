@@ -5,25 +5,14 @@ import com.mochafox.gatorade.Config;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
-
-import com.mochafox.gatorade.Gatorade;
-
-/**
- * Event handler for electrolytes system.
- */
-@EventBusSubscriber(modid = Gatorade.MODID)
 public class ElectrolytesEvents {
-    
-    @SubscribeEvent
+
     public static void onRegisterCommands(RegisterCommandsEvent event) {
         ElectrolytesCommand.register(event.getDispatcher());
     }
-    
-    @SubscribeEvent
+
     public static void onPlayerTick(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
         

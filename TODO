@@ -29,6 +29,7 @@
 ### Behavior
 - Electrolytes should deplete with tool use
 - Electrolytes should deplete when jumping and swimming
+- Gatorade hotsprings, max out electrolytes when in contact, return to previous level when exit
 
 ### Blocks & Items
 #### Plastic Gatorade Bottle
@@ -67,7 +68,7 @@
 
 ### Misc
 - Fix issue where messages are displayed weirdly when bottle interacts with a bucket
-- Tweaks to ElectrolytesEvents
+- Right click physical fluid to consume 250mB and remove the source block.
 
 ### Electrolytes
 - Change electrolytes so they are only enabled in survival, as oppoed to being disabled in creative

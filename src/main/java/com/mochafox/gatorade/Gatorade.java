@@ -8,7 +8,6 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 
 import com.mochafox.gatorade.advancement.ModAdvancementTriggers;
 import com.mochafox.gatorade.block.ModBlocks;
@@ -22,8 +21,10 @@ import com.mochafox.gatorade.fluid.custom.GatoradeFluid;
 
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import com.mochafox.gatorade.datagen.GatoradeDataGenerators;
+import com.mochafox.gatorade.electrolytes.ElectrolytesEvents;
 
 /**
  * Gatorade Mod - Parody Disclaimer
@@ -44,7 +45,6 @@ public class Gatorade {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public Gatorade(IEventBus modEventBus, ModContainer modContainer) {
-        modEventBus.addListener(this::commonSetup);
 
         // Datagen stuff
         modEventBus.addListener((GatherDataEvent.Server e) -> GatoradeDataGenerators.onGatherData(e));
@@ -60,17 +60,16 @@ public class Gatorade {
         ModAttachments.register(modEventBus);
         ModAdvancementTriggers.register(modEventBus);
 
-        // Register capabilities
+        // Register listeners
         modEventBus.addListener(CapabilityHandler::registerCapabilities);
+        NeoForge.EVENT_BUS.addListener(ElectrolytesEvents::onPlayerTick);
+        NeoForge.EVENT_BUS.addListener(ElectrolytesEvents::onRegisterCommands);
 
         // Register config
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-    }
-
-    private void commonSetup(FMLCommonSetupEvent event) {
+        
         LOGGER.info("ARE YOU JUICED UP? GATORADE MOD IS SLAMMING INTO YOUR UNIVERSE!");
     }
-
     /**
      * Utility method to check if a fluid is a valid Gatorade fluid.
      * In chaos mode, any non-empty fluid is considered valid.
