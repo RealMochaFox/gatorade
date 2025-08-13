@@ -1,6 +1,7 @@
 package com.mochafox.gatorade;
 
 import com.mochafox.gatorade.client.ClientEventHandler;
+import com.mochafox.gatorade.datagen.GatoradeDataGenerators;
 
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -8,6 +9,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 @Mod(value = Gatorade.MODID, dist = Dist.CLIENT)
 public class GatoradeClient {
@@ -16,9 +18,11 @@ public class GatoradeClient {
         // The config screen is accessed by going to the Mods screen > clicking on your mod > clicking on config.
         // Do not forget to add translations for your config options to the en_us.json file.
         container.registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
+
         
         // Register client event handlers
         IEventBus modEventBus = container.getEventBus();
+        modEventBus.addListener((GatherDataEvent.Client e) -> GatoradeDataGenerators.onGatherData(e));
         modEventBus.addListener(ClientEventHandler::registerGuiLayers);
         modEventBus.addListener(ClientEventHandler::registerClientExtensions);
         modEventBus.addListener(ClientEventHandler::registerItemTintSources);

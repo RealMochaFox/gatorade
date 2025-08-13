@@ -48,7 +48,6 @@ public class Gatorade {
 
         // Datagen stuff
         modEventBus.addListener((GatherDataEvent.Server e) -> GatoradeDataGenerators.onGatherData(e));
-        modEventBus.addListener((GatherDataEvent.Client e) -> GatoradeDataGenerators.onGatherData(e));
 
         // Register all mod registries
         ModBlocks.register(modEventBus);
