@@ -69,8 +69,9 @@ A NeoForge mod for Minecraft that adds Gatorade as a naturally occurring resourc
 
 ### World Generation
 - **Gatorade Lakes**: Naturally occurring Gatorade lakes in all overworld biomes
-  - Rare generation (1 in 500 rarity)
+  - Rare generation
   - Contains various Gatorade flavors
+  - Fix for lake crash in 1.21.x
 
 ### Configuration Options
 - **Electrolytes System**: Enable/disable the entire electrolytes mechanic
@@ -93,6 +94,7 @@ A NeoForge mod for Minecraft that adds Gatorade as a naturally occurring resourc
     - Drink all Gatorade flavors
   - Equipment achievements:
     - Obtain a cooler
+    - Obtain a squeeze bottle
 
 ### Chaos Mode
 - **Universal Fluid Support**: When enabled, allows drinking and storing all fluids in the game

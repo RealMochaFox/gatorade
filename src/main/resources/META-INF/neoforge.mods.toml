@@ -17,3 +17,6 @@ logoFile="icon.png"
 authors="${mod_authors}"
 description='''${mod_description}\n\n§lThis mod is unofficial and is not affiliated with Gatorade or PepsiCo in any way. This mod is a parody of sports drinks and their marketing around electrolytes.§r'''
 credits='''\n\n- Spritework by hecklechet\n- https://docs.neoforged.net\n- https://github.com/Tutorials-By-Kaupenjoe\n- https://docs.blamejared.com/1.21.1'''
+
+[[mixins]]
+config="${mod_id}.mixins.json"
