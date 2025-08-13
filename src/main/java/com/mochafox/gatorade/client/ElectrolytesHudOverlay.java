@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.GameType;
 import net.neoforged.neoforge.client.gui.GuiLayer;
 
 import javax.annotation.Nonnull;
@@ -29,9 +30,9 @@ public class ElectrolytesHudOverlay implements GuiLayer {
             return;
         }
         
-        // Only render in survival/adventure mode and when not in spectator
-        if (!minecraft.options.hideGui && minecraft.gameMode != null && minecraft.gameMode.canHurtPlayer() && minecraft.player != null) {
-            Player player = minecraft.player;
+        // Only render in survival mode
+        Player player = minecraft.player;
+        if (!minecraft.options.hideGui && minecraft.gameMode != null && player != null && minecraft.gameMode.getPlayerMode() == GameType.SURVIVAL) {
             
             int screenWidth = guiGraphics.guiWidth();
             int screenHeight = guiGraphics.guiHeight();

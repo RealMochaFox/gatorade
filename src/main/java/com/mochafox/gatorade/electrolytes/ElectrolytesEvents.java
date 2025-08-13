@@ -26,8 +26,9 @@ public class ElectrolytesEvents {
             return;
         }
 
-        // In creative mode, electrolytes are not active
-        if (player.isCreative()) {
+        // Electrolytes are only active in survival mode
+        var gameMode = player.gameMode();
+        if (gameMode == null || !gameMode.isSurvival()) {
             return;
         }
         
