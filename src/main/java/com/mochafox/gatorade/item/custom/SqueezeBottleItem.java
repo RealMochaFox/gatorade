@@ -5,6 +5,7 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.ARGB;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -239,8 +240,7 @@ public class SqueezeBottleItem extends Item {
             player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.bottle.filled", actuallyFilled, fluidName), true);
             
             // Play pickup sound
-            level.playSound(null, player.getX(), player.getY(), player.getZ(), 
-                            SoundEvents.BUCKET_FILL, net.minecraft.sounds.SoundSource.PLAYERS, 1.0F, 1.0F);
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.WET_SPONGE_HIT, SoundSource.PLAYERS, 1.0F, 1.0F);
             
             return InteractionResult.SUCCESS;
         }
@@ -262,6 +262,7 @@ public class SqueezeBottleItem extends Item {
             // Provide feedback to the player
             String fluidName = drained.getFluid().getFluidType().getDescription().getString();
             player.displayClientMessage(Component.translatable("item.gatorade.squeeze_bottle.bottle.filled", filled, fluidName), true);
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.WET_SPONGE_HIT, SoundSource.PLAYERS, 1.0F, 1.0F);
 
             return InteractionResult.SUCCESS;
         } else if (itemFluid.getAmount() >= CAPACITY) {
