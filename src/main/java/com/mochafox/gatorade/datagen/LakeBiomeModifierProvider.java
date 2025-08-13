@@ -33,7 +33,7 @@ public class LakeBiomeModifierProvider implements DataProvider {
                 .filter(id -> !id.getPath().endsWith("_flowing"))
                 .forEach(id -> features.add(Gatorade.MODID + ":" + id.getPath() + "_gatorade_lake"));
         root.add("features", features);
-        root.addProperty("step", "lakes");
+        root.addProperty("step", "vegetal_decoration");
 
         var id = ResourceLocation.fromNamespaceAndPath(Gatorade.MODID, "add_gatorade_lakes_overworld");
         var path = pathProvider.json(id);
