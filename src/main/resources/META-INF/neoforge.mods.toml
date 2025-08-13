@@ -12,7 +12,7 @@ displayName="${mod_name}"
 # A URL to refer people to when problems occur with this mod
 #issueTrackerURL="https://change.me.to.your.issue.tracker.example.invalid/" #optional
 
-displayURL="https://mochafox.com/projects/gatorade"
+displayURL="https://projects.mochafox.com/"
 logoFile="icon.png"
 authors="${mod_authors}"
 description='''${mod_description}\n\n§lThis mod is unofficial and is not affiliated with Gatorade or PepsiCo in any way. This mod is a parody of sports drinks and their marketing around electrolytes.§r'''
