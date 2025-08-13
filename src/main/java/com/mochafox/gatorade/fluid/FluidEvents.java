@@ -1,6 +1,8 @@
 package com.mochafox.gatorade.fluid;
 
+import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.mochafox.gatorade.Config;
@@ -19,6 +21,7 @@ import net.neoforged.neoforge.fluids.FluidType;
 public class FluidEvents {
     private static long lastFluidTick;
     private static Set<FluidType> gatoradeFluidTypes;
+    private static Set<UUID> playersInFluid = new HashSet<>(); // unsure if this is the right way to do this
 
     private static Set<FluidType> getGatoradeFluidTypes() {
         if (gatoradeFluidTypes == null) {
@@ -39,13 +42,25 @@ public class FluidEvents {
                 return;
             }
             
-            if (player.isInFluidType((fluidType, height) -> getGatoradeFluidTypes().contains(fluidType) && height > 0.0)) {
-                Gatorade.LOGGER.info("Entity tick event: " + event.getEntity().getName().getString());
+            boolean isInGatoradeFluid = player.isInFluidType((fluidType, height) -> getGatoradeFluidTypes().contains(fluidType) && height > 0.0);
+            UUID playerId = player.getUUID();
+            boolean wasInFluid = playersInFluid.contains(playerId);
+            
+            if (isInGatoradeFluid) {
+                // If player just entered the fluid, play splash sound
+                if (!wasInFluid) {
+                    playersInFluid.add(playerId);
+                    player.level().playSound(null, player.getX(), player.getY(), player.getZ(), 
+                        SoundEvents.PLAYER_SPLASH, SoundSource.PLAYERS, 1.0F, 1.0F);
+                }
 
                 applyElectrolyteEffects(player, currentTime);
                 applyPhysicalGatoradeEffects(player);
 
                 lastFluidTick = currentTime;
+            } else if (wasInFluid) {
+                // Player left the fluid, remove from tracking
+                playersInFluid.remove(playerId);
             }
 
         }
@@ -60,7 +75,11 @@ public class FluidEvents {
 
         if (currentTime % gatoradeBathingRegenerationRate == 0) {
             ElectrolytesUtil.addElectrolytes(player, gatoradeBathingRegenerationAmount);
-            player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, player.getX(), player.getY() + 0.5, player.getZ(), 0, 0, 0);
+            player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, player.getX(), player.getY() + 1, player.getZ() + 1, 0, 0, 0);
+            player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, player.getX(), player.getY() + 1, player.getZ() + 1, 0, 0, 0);
+            player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, player.getX(), player.getY() + 1, player.getZ() + 1, 0, 0, 0);
+            player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, player.getX(), player.getY() + 1, player.getZ() + 1, 0, 0, 0);
+            player.level().addParticle(ParticleTypes.HAPPY_VILLAGER, player.getX(), player.getY() + 1, player.getZ() + 1, 0, 0, 0);
             player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.VILLAGER_CELEBRATE, SoundSource.PLAYERS, 1.0F, 1.0F);
         }
     }
@@ -70,11 +89,11 @@ public class FluidEvents {
         if (!gatoradeBathingRegenerationPhysicalEffects) return;
 
         if (!player.hasEffect(MobEffects.REGENERATION)) {
-            player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 0, 0));
+            player.addEffect(new MobEffectInstance(MobEffects.REGENERATION, 200, 0));
         }
 
         if (!player.hasEffect(MobEffects.SPEED)) {
-            player.addEffect(new MobEffectInstance(MobEffects.SPEED, 0, 0));
+            player.addEffect(new MobEffectInstance(MobEffects.SPEED, 200, 0));
         }
     }
 }
