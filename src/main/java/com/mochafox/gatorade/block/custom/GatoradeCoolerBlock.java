@@ -5,6 +5,8 @@ import com.mochafox.gatorade.block.entity.GatoradeCoolerBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.LivingEntity;
@@ -120,6 +122,9 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
                     // Different fluids
                     player.displayClientMessage(Component.translatable("block.gatorade.gatorade_cooler_block.different_fluid"), true);
                     return InteractionResult.FAIL;
+                } else if (currentFluid.getAmount() + Gatorade.BUCKET_AMOUNT > blockFluidHandler.getTankCapacity(0)) {
+                    // Not enough space in cooler
+                    player.displayClientMessage(Component.translatable("block.gatorade.gatorade_cooler_block.not_enough_space", Gatorade.BUCKET_AMOUNT), true);
                 }
             }
             return InteractionResult.FAIL;
@@ -138,6 +143,7 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
                 }
             }
             
+            player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.WET_SPONGE_HIT, SoundSource.PLAYERS, 1.0F, 1.0F);
             return InteractionResult.SUCCESS;
         }
         
@@ -176,6 +182,7 @@ public class GatoradeCoolerBlock extends BaseEntityBlock implements LiquidBlockC
 
         // Drain the fluid from the cooler
         blockFluidHandler.drain(Gatorade.BUCKET_AMOUNT, IFluidHandler.FluidAction.EXECUTE);
+        player.level().playSound(null, player.getX(), player.getY(), player.getZ(), SoundEvents.WET_SPONGE_HIT, SoundSource.PLAYERS, 1.0F, 1.0F);
         
         // Handle inventory management
         if (!player.hasInfiniteMaterials()) {

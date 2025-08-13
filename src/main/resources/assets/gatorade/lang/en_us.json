@@ -35,6 +35,7 @@
   "block.gatorade.gatorade_cooler_block.not_enough_fluid_for_bucket": "The Gatorade Cooler does not contain enough fluid to fill a bucket (%d mB/%d mB).",
   "block.gatorade.gatorade_cooler_block.contains_invalid_fluid": "The Gatorade Cooler contains an invalid fluid: %s (Was Chaos Mode enabled?)",
   "block.gatorade.gatorade_cooler_block.different_fluid": "The Gatorade Cooler contains a different fluid!",
+  "block.gatorade.gatorade_cooler_block.not_enough_space": "The Gatorade Cooler does not have enough space for %d mB of fluid!",
 
   "item.gatorade.gatorade_bucket.name": "%s Bucket",
 
