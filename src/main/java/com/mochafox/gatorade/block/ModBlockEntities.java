@@ -15,7 +15,7 @@ public class ModBlockEntities {
 
     public static final Supplier<BlockEntityType<GatoradeCoolerBlockEntity>> GATORADE_COOLER_BLOCK_ENTITY =
             BLOCK_ENTITIES.register("gatorade_cooler_block_entity", 
-                    () -> new BlockEntityType<>(GatoradeCoolerBlockEntity::new, ModBlocks.GATORADE_COOLER_BLOCK.get()));
+                    () -> new BlockEntityType<GatoradeCoolerBlockEntity>(GatoradeCoolerBlockEntity::new, ModBlocks.GATORADE_COOLER_BLOCK.get()));
     
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
